@@ -11,7 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
+<<<<<<< HEAD
         title: 'Assurance Manager prueba',
+=======
+        title: 'Assurance Manager_',
+>>>>>>> bacf0126f3f8ca278b2cd52cb35f717f2611e60a
         smartManagement: SmartManagement.keepFactory,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
