@@ -12,10 +12,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
 <<<<<<< HEAD
+<<<<<<< HEAD
         title: 'Assurance Manager prueba',
 =======
         title: 'Assurance Manager_',
 >>>>>>> bacf0126f3f8ca278b2cd52cb35f717f2611e60a
+=======
+        title: 'Assurance Manager prueba',
+>>>>>>> Roger
         smartManagement: SmartManagement.keepFactory,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
