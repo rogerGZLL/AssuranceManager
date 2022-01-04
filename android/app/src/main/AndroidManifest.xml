@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mx.developer.assurancemaganer.assuranc_manager">
+    package="mx.developerdreams.assurances.assurance">
    <application
-        android:label="assuranc_manager"
+        android:label="assurance"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

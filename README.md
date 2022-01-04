@@ -1,6 +1,6 @@
-# assuranc_manager
+# assurance
 
-Assurance Manager project
+A new Flutter project.
 
 ## Getting Started
 

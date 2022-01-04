@@ -1,4 +1,4 @@
-package mx.developer.assurancemaganer.assuranc_manager;
+package mx.developerdreams.assurances.assurance;
 
 import io.flutter.embedding.android.FlutterActivity;
 
