@@ -1,3 +1,5 @@
+import 'package:assurance/constants/constants.dart';
+import 'package:assurance/constants/theme_color.dart';
 import 'package:assurance/modules/splash/controllers/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,15 @@ class SplashPage extends StatelessWidget {
     return GetBuilder<SplashController>(
         init: SplashController(),
         builder: (_) {
-          return Scaffold();
+          return Scaffold(
+              backgroundColor: ThemeColor.colorPrimary,
+              body: Center(
+                child: Image.asset(
+                  Constants.icLogo,
+                  width: 250,
+                  height: 250,
+                ),
+              ));
         });
   }
 }
