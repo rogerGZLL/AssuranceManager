@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,11 @@ class SplashPage extends StatelessWidget {
           return Scaffold(
               backgroundColor: ThemeColor.colorPrimary,
               body: Center(
-                child: Image.asset(
-                  Constants.icLogo,
-                  width: 250,
-                  height: 250,
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Image.asset(
+                    Constants.icLogo,
+                  ),
                 ),
               ));
         });
