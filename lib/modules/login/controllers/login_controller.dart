@@ -3,6 +3,7 @@ import 'package:assurance/Firebase/firebase_services.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/modules/home/pages/home_page.dart';
 import 'package:assurance/modules/login/pages/reset_password_page.dart';
+import 'package:assurance/modules/register/pages/register_page.dart';
 import 'package:assurance/utils/utils.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,7 @@ class LoginController extends GetxController {
           UtilsDialog.alertDialogOneAction(Get.overlayContext,
               Strings.sEmailResetSent, Strings.sEmailResetSentContent, () {
             Get.back();
+            Get.back();
           });
         });
       });
@@ -109,6 +111,10 @@ class LoginController extends GetxController {
 
   void toResetPassword() {
     Get.to(() => const ResetPasswordPage());
+  }
+
+  void toRegister() {
+    Get.to(() => const RegisterPage());
   }
 
   void toHomePage() {

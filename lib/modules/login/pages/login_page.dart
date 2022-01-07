@@ -75,7 +75,7 @@ class LoginPage extends StatelessWidget {
                             paddingHorizontal: 0.0,
                             paddingVertical: 0.0),
                         WidgetButtonSecondary(
-                            text: Strings.sRegistrate, fun: () {}),
+                            text: Strings.sRegistrate, fun: _.toRegister),
                       ],
                     ),
                   ],
