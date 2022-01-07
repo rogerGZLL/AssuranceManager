@@ -6,10 +6,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return const GetMaterialApp(
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -32,5 +33,28 @@ class MyApp extends StatelessWidget {
           Locale('es'),
         ],
         home: SplashPage());
+=======
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: GetMaterialApp(
+          title: 'Assurance Manager',
+          smartManagement: SmartManagement.keepFactory,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              backgroundColor: Colors.white,
+              appBarTheme: AppBarTheme(foregroundColor: Colors.black)),
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('en'),
+            Locale('es'),
+          ],
+          home: const SplashPage()),
+    );
+>>>>>>> Roger
   }
 }
