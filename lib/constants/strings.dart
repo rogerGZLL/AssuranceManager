@@ -15,4 +15,11 @@ class Strings {
   static String sErrorCorreoFormat =
       'El formato de correo electrónico es inválido';
   static String sErrorPasswordEmpty = 'Ingresa tu contraseña';
+  static String sCargando = 'Cargando...';
+  static String sResetPassword = 'Recuperar contraseña';
+  static String sEmailResetSent = 'Correo enviado';
+  static String sEmailResetSentContent =
+      'El correo para recuperar la contraseña ha sido enviado con éxito';
+  static String sResetPasswordDescription =
+      'Ingresa tu correo para recuperar la contraseña.';
 }

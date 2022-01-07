@@ -12,10 +12,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: const GetMaterialApp(
-          title: 'Assurance Manager prueba',
+      child: GetMaterialApp(
+          title: 'Assurance Manager',
           smartManagement: SmartManagement.keepFactory,
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              backgroundColor: Colors.white,
+              appBarTheme: AppBarTheme(foregroundColor: Colors.black)),
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
             Locale('en'),
             Locale('es'),
           ],
-          home: SplashPage()),
+          home: const SplashPage()),
     );
   }
 }

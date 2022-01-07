@@ -57,7 +57,8 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         WidgetButtonSecondary(
-                            text: Strings.sForgotPassword, fun: () {}),
+                            text: Strings.sForgotPassword,
+                            fun: _.toResetPassword),
                       ],
                     ),
                     const WidgetMargin(margin: 32),
