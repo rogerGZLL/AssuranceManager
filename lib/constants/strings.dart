@@ -22,4 +22,5 @@ class Strings {
       'El correo para recuperar la contraseña ha sido enviado con éxito';
   static String sResetPasswordDescription =
       'Ingresa tu correo para recuperar la contraseña.';
+  static String sRegister = 'Registro';
 }

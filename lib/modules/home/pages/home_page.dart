@@ -8,7 +8,11 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(
         init: HomeController(),
         builder: (_) {
-          return Scaffold();
+          return Scaffold(
+            body: Center(
+              child: Text('Menu principal\nComing Soon...'),
+            ),
+          );
         });
   }
 }
