@@ -10,19 +10,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-        title: 'Assurance Manager prueba',
-        smartManagement: SmartManagement.keepFactory,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          Locale('en'),
-          Locale('es'),
-        ],
-        home: SplashPage());
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: const GetMaterialApp(
+          title: 'Assurance Manager prueba',
+          smartManagement: SmartManagement.keepFactory,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('en'),
+            Locale('es'),
+          ],
+          home: SplashPage()),
+    );
   }
 }
