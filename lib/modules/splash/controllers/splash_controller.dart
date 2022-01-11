@@ -10,7 +10,7 @@ class SplashController extends GetxController {
     super.onReady();
     // ignore: avoid_print
     Firebase.initializeApp().then((value) => print(value.options.asMap));
-    Future.delayed(const Duration(seconds: 1), () => comprobarSesion());
+    Future.delayed(const Duration(seconds: 3), () => comprobarSesion());
   }
 
   void comprobarSesion() {
