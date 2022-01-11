@@ -1,3 +1,4 @@
+import 'package:assurance/constants/theme_color.dart';
 import 'package:assurance/modules/splash/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
           smartManagement: SmartManagement.keepFactory,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              scaffoldBackgroundColor: Colors.white,
-              backgroundColor: Colors.white,
-              appBarTheme: AppBarTheme(foregroundColor: Colors.black)),
+            scaffoldBackgroundColor: Colors.white,
+            backgroundColor: Colors.white,
+            appBarTheme: AppBarTheme(foregroundColor: Colors.black),
+          ),
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

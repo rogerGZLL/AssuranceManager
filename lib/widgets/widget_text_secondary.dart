@@ -18,6 +18,7 @@ class WidgetTextSecondary extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.justify,
+        style: TextStyle(color: Colors.black54),
       ),
     );
   }

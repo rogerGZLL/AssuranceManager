@@ -24,7 +24,7 @@ class WidgetInputMain extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-          child: Text(hintText),
+          child: Text(hintText, style: TextStyle(color: Colors.black54)),
         ),
         TextFormField(
           textCapitalization: textCapitalization,
