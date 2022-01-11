@@ -27,7 +27,7 @@ class RegisterController extends GetxController {
   void onReady() {
     super.onReady();
     _progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
-    llenarDatos();
+    //llenarDatos();
   }
 
   void llenarDatos() {
