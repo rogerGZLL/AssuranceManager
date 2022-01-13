@@ -1,6 +1,8 @@
+import 'package:assurance/constants/constants.dart';
+
 class Usuario {
   String uid;
-  String avatar;
+  String avatar = Constants.urlProfileGeneric;
   bool borrado;
   String correo;
   bool correoBirthday;
@@ -16,7 +18,10 @@ class Usuario {
   Usuario();
   Usuario.fromJson(String key, Map value) {
     uid = key;
-    avatar = value['avatar'];
+    String avt = value['avatar'];
+    if (avt.length > 0) {
+      avatar = value['avatar'];
+    }
     borrado = value['borrado'];
     correo = value['correo'];
     correoBirthday = value['correoBirthday'];

@@ -1,4 +1,5 @@
 class Strings {
+  static String appTitle = 'Assurance Manager';
   static String sLoginTitle = 'Iniciar sesión';
   static String sEmail = 'Correo electrónico';
   static String sPassword = 'Contraseña';
