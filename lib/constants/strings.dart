@@ -44,4 +44,7 @@ class Strings {
   static String sInicioTitle = 'Inicio';
   static String sPerfilTitle = 'Perfil';
   static String sSalirTitle = 'Cerrar sesión';
+  static String sErrorUsuario =
+      'Ocurrió un error al obtener los datos del usuario,\npor favor intentalo más tarde';
+  static String sIntentarDeNuevo = 'Intentar de nuevo';
 }
