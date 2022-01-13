@@ -90,8 +90,11 @@ class LoginController extends GetxController {
         .then((value) {
       Future.delayed(const Duration(milliseconds: 200)).then((value) {
         _progressDialog.hide().whenComplete(() {
-          UtilsDialog.alertDialogOneAction(Get.overlayContext,
-              Strings.sEmailResetSent, Strings.sEmailResetSentContent, () {
+          UtilsDialog.alertDialogOneAction(
+              Get.overlayContext,
+              Strings.sEmailResetSent,
+              Strings.sEmailResetSentContent,
+              Strings.sAceptar, () {
             Get.back();
             Get.back();
           });

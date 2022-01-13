@@ -1,4 +1,5 @@
 class Strings {
+  static String appTitle = 'Assurance Manager';
   static String sLoginTitle = 'Iniciar sesión';
   static String sEmail = 'Correo electrónico';
   static String sPassword = 'Contraseña';
@@ -9,6 +10,7 @@ class Strings {
   static String sRegistrate = 'Registrate';
   static String sError = 'Error';
   static String sAceptar = 'Aceptar';
+  static String sCancelar = 'Cancelar';
   static String sErrorCorreoEmpty = 'Por favor ingresa tu correo electrónico';
   static String sErrorCorreoFormat =
       'El formato de correo electrónico es inválido';
@@ -37,4 +39,21 @@ class Strings {
       'Tu contraseña debe contener mínimo 6 caracteres';
   static String sErrorPasswordConfirmEmpty = 'Por favor confirma tu contraseña';
   static String sErrorPasswordConfirmFormat = 'Las contraselas no coincien';
+  static String signOut = 'Cerrar sesión';
+  static String signOutConfirm = '¿Estás seguro que deseas cerrar tu sesión?';
+  static String signOutError = 'No fue posible cerrar la sesión';
+  static String sInicioTitle = 'Inicio';
+  static String sPerfilTitle = 'Perfil';
+  static String sSalirTitle = 'Cerrar sesión';
+  static String sErrorUsuario =
+      'Ocurrió un error al obtener los datos del usuario,\npor favor intentalo más tarde';
+  static String sIntentarDeNuevo = 'Intentar de nuevo';
+  //Menu
+  static String sMisPolizas = 'Mis pólizas';
+  static String sMisClientes = 'Mis clientes';
+  static String sPolizasPendientes = 'Pólizas pendientes';
+  static String sGastosIngresos = 'Mis gastos e ingresos';
+  static String sNotas = 'Notas';
+  static String sMiActividad = 'Mi actividad';
+  static String sAcercaDe = 'Acerca de nosotros';
 }
