@@ -1,5 +1,6 @@
 import 'package:assurance/modules/inicio/controllers/inicio_controller.dart';
 import 'package:assurance/modules/inicio/pages/widgets/inicio_title_image.dart';
+import 'package:assurance/modules/inicio/pages/widgets/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,9 +15,7 @@ class InicioPage extends StatelessWidget {
                 onRefresh: _.homeController.obtenerUsuarioFirebase,
                 child: ListView(
                   physics: AlwaysScrollableScrollPhysics(),
-                  children: [
-                    InicioTitleImage(),
-                  ],
+                  children: [InicioTitleImage(), MainMenu()],
                 )),
           );
         });

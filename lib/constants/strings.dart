@@ -48,4 +48,12 @@ class Strings {
   static String sErrorUsuario =
       'Ocurrió un error al obtener los datos del usuario,\npor favor intentalo más tarde';
   static String sIntentarDeNuevo = 'Intentar de nuevo';
+  //Menu
+  static String sMisPolizas = 'Mis pólizas';
+  static String sMisClientes = 'Mis clientes';
+  static String sPolizasPendientes = 'Pólizas pendientes';
+  static String sGastosIngresos = 'Mis gastos e ingresos';
+  static String sNotas = 'Notas';
+  static String sMiActividad = 'Mi actividad';
+  static String sAcercaDe = 'Acerca de nosotros';
 }
