@@ -18,7 +18,7 @@ class MainMenu extends StatelessWidget {
           MainMenuItem(
               title: Strings.sMisPolizas,
               img: Constants.icMisPolizas,
-              fun: () {}),
+              fun: () => _.toRoutes(Constants.menuPolizasPendientes)),
           WidgetMargin(margin: 16),
           Row(
             children: [
@@ -26,14 +26,14 @@ class MainMenu extends StatelessWidget {
                 child: MainMenuItem(
                     title: Strings.sMisClientes,
                     img: Constants.icMisClientes,
-                    fun: () {}),
+                    fun: () => _.toRoutes(Constants.menuMisClientes)),
               ),
               WidgetMargin(margin: 16),
               Expanded(
                 child: MainMenuItem(
                     title: Strings.sPolizasPendientes,
                     img: Constants.icPolizasPendientes,
-                    fun: () {}),
+                    fun: () => _.toRoutes(Constants.menuPolizasPendientes)),
               ),
             ],
           ),
@@ -41,26 +41,30 @@ class MainMenu extends StatelessWidget {
           MainMenuItem(
               title: Strings.sGastosIngresos,
               img: Constants.icGastosIngresos,
-              fun: () {}),
+              fun: () => _.toRoutes(Constants.menuGastosIngresos)),
           WidgetMargin(margin: 16),
           Row(
             children: [
               Expanded(
                 child: MainMenuItem(
-                    title: Strings.sNotas, img: Constants.icNotas, fun: () {}),
+                    title: Strings.sNotas,
+                    img: Constants.icNotas,
+                    fun: () => _.toRoutes(Constants.menuNotas)),
               ),
               WidgetMargin(margin: 16),
               Expanded(
                 child: MainMenuItem(
                     title: Strings.sMiActividad,
                     img: Constants.icMiActividad,
-                    fun: () {}),
+                    fun: () => _.toRoutes(Constants.menuActividad)),
               ),
             ],
           ),
           WidgetMargin(margin: 16),
           MainMenuItem(
-              title: Strings.sAcercaDe, img: Constants.icAbout, fun: () {}),
+              title: Strings.sAcercaDe,
+              img: Constants.icAbout,
+              fun: () => _.toRoutes(Constants.menuAbout)),
           WidgetMargin(margin: 24),
         ],
       );

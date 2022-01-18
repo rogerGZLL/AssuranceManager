@@ -11,13 +11,16 @@ class InicioPage extends StatelessWidget {
         init: InicioController(),
         builder: (_) {
           return Scaffold(
-            body: RefreshIndicator(
+              body: ListView(
+            physics: BouncingScrollPhysics(),
+            children: [InicioTitleImage(), MainMenu()],
+          ) /*RefreshIndicator(
                 onRefresh: _.homeController.obtenerUsuarioFirebase,
                 child: ListView(
                   physics: AlwaysScrollableScrollPhysics(),
                   children: [InicioTitleImage(), MainMenu()],
-                )),
-          );
+                )),*/
+              );
         });
   }
 }

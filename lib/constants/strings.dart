@@ -1,4 +1,8 @@
 class Strings {
+  //Generic
+  static String sSinDatos = 'Sin datos';
+  static String sEliminar = 'Eliminar';
+  //
   static String appTitle = 'Assurance Manager';
   static String sLoginTitle = 'Iniciar sesión';
   static String sEmail = 'Correo electrónico';
@@ -56,4 +60,12 @@ class Strings {
   static String sNotas = 'Notas';
   static String sMiActividad = 'Mi actividad';
   static String sAcercaDe = 'Acerca de nosotros';
+  static String sCrearNota = 'Crear nota';
+  //Notas
+  static String sTitulo = 'Titulo';
+  static String sTituloNota = 'Titulo de la nota';
+  static String sContenido = 'Contenido';
+  static String sContenidoNota = 'Escribe aqui el contenido de la nota';
+  static String sEliminarNota = 'Eliminar nota';
+  static String sEliminarNotaConfirm = '¿Seguro que quieres eliminar esta nota';
 }
