@@ -18,7 +18,7 @@ class MainMenu extends StatelessWidget {
           MainMenuItem(
               title: Strings.sMisPolizas,
               img: Constants.icMisPolizas,
-              fun: () => _.toRoutes(Constants.menuPolizasPendientes)),
+              fun: () => _.toRoutes(Constants.menuMisPolizas)),
           WidgetMargin(margin: 16),
           Row(
             children: [
