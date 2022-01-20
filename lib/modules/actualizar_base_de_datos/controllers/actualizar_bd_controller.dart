@@ -136,12 +136,12 @@ class ActualizarBdController extends GetxController {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if(result==null) return;
     final path = result.files.single.path;
-    file = 
+    file = File(path);
   }
 
 
   void manageRowsColumns(){
-
+    
   }
 
 
