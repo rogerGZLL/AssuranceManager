@@ -10,8 +10,8 @@ import 'package:assurance/modules/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:file/file.dart';
+//import 'package:file_picker/file_picker.dart';
+//import 'package:file/file.dart';
 
 
 class ActualizarBdController extends GetxController {
@@ -133,10 +133,10 @@ class ActualizarBdController extends GetxController {
 
 
   Future uploadFile() async{
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-    if(result==null) return;
-    final path = result.files.single.path;
-    file = File(path);
+    //final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    //if(result==null) return;
+    //final path = result.files.single.path;
+    //file = File(path);
   }
 
 
