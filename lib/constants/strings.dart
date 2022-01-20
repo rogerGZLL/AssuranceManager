@@ -9,6 +9,7 @@ class Strings {
   static String sRegistrate = 'Registrate';
   static String sError = 'Error';
   static String sAceptar = 'Aceptar';
+  static String sCancelar = 'Cancelar';
   static String sErrorCorreoEmpty = 'Por favor ingresa tu correo electrónico';
   static String sErrorCorreoFormat =
       'El formato de correo electrónico es inválido';
@@ -37,4 +38,12 @@ class Strings {
       'Tu contraseña debe contener mínimo 6 caracteres';
   static String sErrorPasswordConfirmEmpty = 'Por favor confirma tu contraseña';
   static String sErrorPasswordConfirmFormat = 'Las contraselas no coincien';
+
+  // ACTUALIZAR BD
+
+  static String sActualizarBaseDeDatosTitle = 'Actualizar base de datos';
+  static String sImportarExcel = 'Importar archivo excel';
+  static String sAdministrarColumnasFilas = 'Administrar columnas y filas';
+  static String sNoActualizar = 'Elegir qué pólizas no actualizar';
+  static String sActualizar = 'Actualizar';
 }
