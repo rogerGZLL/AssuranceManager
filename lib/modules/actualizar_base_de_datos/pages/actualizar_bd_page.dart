@@ -53,10 +53,11 @@ class ActualizarBdPage extends StatelessWidget {
                         context,
                         _.files,   // View for excel importation
                         (int i){
-                          // abrir archivo(i)
+                          _.openFile;
                         },
                         (int i){
                           _.selectedFiles.add(i);
+                          _.longPressFile;
                         }),
                     const WidgetMargin(margin: margin),
                     Divider(),
