@@ -6,13 +6,14 @@ class WidgetButtonMain extends StatelessWidget {
   final Function fun;
   final double paddingHorizontal;
   final double paddingVertical;
+  final Color color;
 
-  WidgetButtonMain({
-    @required this.text,
-    @required this.paddingHorizontal,
-    @required this.paddingVertical,
-    @required this.fun,
-  });
+  WidgetButtonMain(
+      {@required this.text,
+      @required this.paddingHorizontal,
+      @required this.paddingVertical,
+      @required this.fun,
+      this.color});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +28,7 @@ class WidgetButtonMain extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0)),
             disabledTextColor: Colors.white70,
             textColor: Colors.white,
-            color: ThemeColor.colorPrimary,
+            color: color == null ? ThemeColor.colorPrimary : color,
             child: SizedBox(
               width: double.infinity,
               child: Padding(

@@ -1,6 +1,7 @@
 class Cliente {
   String id;
   String correo;
+  String fechaNacimiento;
   int fechaCreado;
   int fechaModificado;
   int fechaEliminado;
@@ -12,6 +13,7 @@ class Cliente {
   Cliente.fromJson(String key, Map value) {
     id = key;
     correo = value['correo'];
+    fechaNacimiento = value['fechaNacimiento'];
     fechaCreado = value['fechaCreado'];
     fechaModificado = value['fechaModificado'];
     fechaEliminado = value['fechaEliminado'];

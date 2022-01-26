@@ -21,7 +21,9 @@ class ItemCliente extends StatelessWidget {
           shadowColor: Colors.black45,
           margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           child: ListTile(
-            onTap: () {},
+            onTap: () {
+              _.toClienteDetail(index, cliente);
+            },
             leading: Icon(Icons.person, color: ThemeColor.colorPrimary),
             trailing: Icon(Icons.chevron_right, color: ThemeColor.colorPrimary),
             title: Text(

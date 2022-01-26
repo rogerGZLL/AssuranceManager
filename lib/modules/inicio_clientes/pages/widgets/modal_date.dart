@@ -7,7 +7,8 @@ import 'package:get/state_manager.dart';
 import 'package:get/route_manager.dart';
 
 class ModalDate extends StatelessWidget {
-  const ModalDate({Key key}) : super(key: key);
+  final String type;
+  const ModalDate({Key key, @required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class ModalDate extends StatelessWidget {
                         mode: CupertinoDatePickerMode.date,
                         initialDateTime: DateTime.now(),
                         onDateTimeChanged: (val) {
-                          _.setDateBirth(val.toString());
+                          _.setDateBirth(val.toString(), type);
                         }),
                   ),
                   WidgetButtonSecondary(

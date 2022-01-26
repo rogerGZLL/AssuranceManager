@@ -68,9 +68,11 @@ class Strings {
   static String sContenido = 'Contenido';
   static String sContenidoNota = 'Escribe aqui el contenido de la nota';
   static String sEliminarNota = 'Eliminar nota';
-  static String sEliminarNotaConfirm = '¿Seguro que quieres eliminar esta nota';
+  static String sEliminarNotaConfirm =
+      '¿Seguro que quieres eliminar esta nota?';
   //Clientes
   static String sCrearClient = 'Agregar cliente';
+  static String sDetalleCliente = 'Detalle del cliente';
   static String sNombreCliente = 'Nombre y apellidos del cliente';
   static String sCorreoCliente = 'Correo electrónico';
   static String sTelefonoCliente = 'Teléfono';
@@ -83,4 +85,7 @@ class Strings {
       'El teléfono del cliente es obligatorio';
   static String sErrorFechaCliente =
       'La fecha de nacimiento del cliente es obligatoria';
+  static String sEliminarCliente = 'Eliminar cliente';
+  static String sEliminarClienteConfirm =
+      '¿Seguro que quieres eliminar este cliente?';
 }

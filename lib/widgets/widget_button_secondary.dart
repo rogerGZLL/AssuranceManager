@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class WidgetButtonSecondary extends StatelessWidget {
   final String text;
   final Function fun;
-  WidgetButtonSecondary({@required this.text, @required this.fun});
+  final Color color;
+  WidgetButtonSecondary({@required this.text, @required this.fun, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class WidgetButtonSecondary extends StatelessWidget {
         onPressed: fun,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        textColor: ThemeColor.colorSecondary,
+        textColor: color == null ? ThemeColor.colorSecondary : color,
         child: Text(
           text,
           textAlign: TextAlign.end,
