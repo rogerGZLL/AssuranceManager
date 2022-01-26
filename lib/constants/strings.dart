@@ -3,6 +3,7 @@ class Strings {
   static String sSinDatos = 'Sin datos';
   static String sEliminar = 'Eliminar';
   static String sGuardar = 'Guardar';
+  static String sBuscar = 'Buscar...';
   //
   static String appTitle = 'Assurance Manager';
   static String sLoginTitle = 'Iniciar sesión';

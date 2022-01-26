@@ -38,12 +38,17 @@ class ClientesController extends GetxController {
   TextEditingController get tecFechaNacimientoE => _tecFechaNacimientoE;
   final TextEditingController _tecRFCE = TextEditingController();
   TextEditingController get tecRFCE => _tecRFCE;
+  final TextEditingController _tecBuscador = TextEditingController();
+  TextEditingController get tecBuscador => _tecBuscador;
   List<Cliente> _listCliente = [];
   List<Cliente> get listCliente => _listCliente;
+  List<Cliente> _listClienteBuscador = [];
+  List<Cliente> get listClienteBuscador => _listClienteBuscador;
   bool _cargando = true;
   bool get cargando => _cargando;
   String _birthDay = '';
   ProgressDialog progressDialog;
+  RxString buscador = ''.obs;
 
   @override
   void onReady() {
@@ -59,6 +64,28 @@ class ClientesController extends GetxController {
     _tecTelefono.text = '3314653838';
   }
 
+  void onInputTextChange(String text) {
+    buscador.value = text;
+    if (text == '') {
+      _listClienteBuscador = _listCliente;
+    } else {
+      _listClienteBuscador = _listCliente
+          .where((el) =>
+              el.nombre.toLowerCase().contains(text.toLowerCase()) ||
+              el.telefono.contains(text) ||
+              el.correo.contains(text))
+          .toList();
+    }
+    update();
+  }
+
+  void cleanBuscador() {
+    _tecBuscador.text = '';
+    buscador.value = '';
+    _listClienteBuscador = _listCliente;
+    update();
+  }
+
   void obtenerClientes() {
     _listCliente.clear();
     FirebaseServices.databaseReference
@@ -70,6 +97,7 @@ class ClientesController extends GetxController {
       if (snap.exists) {
         snap.value.forEach((key, value) {
           _listCliente.add(Cliente.fromJson(key, value));
+          _listClienteBuscador = _listCliente;
         });
       }
       _cargando = false;
