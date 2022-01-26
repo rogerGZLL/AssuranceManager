@@ -2,6 +2,7 @@ class Strings {
   //Generic
   static String sSinDatos = 'Sin datos';
   static String sEliminar = 'Eliminar';
+  static String sGuardar = 'Guardar';
   //
   static String appTitle = 'Assurance Manager';
   static String sLoginTitle = 'Iniciar sesión';
@@ -68,4 +69,18 @@ class Strings {
   static String sContenidoNota = 'Escribe aqui el contenido de la nota';
   static String sEliminarNota = 'Eliminar nota';
   static String sEliminarNotaConfirm = '¿Seguro que quieres eliminar esta nota';
+  //Clientes
+  static String sCrearClient = 'Agregar cliente';
+  static String sNombreCliente = 'Nombre y apellidos del cliente';
+  static String sCorreoCliente = 'Correo electrónico';
+  static String sTelefonoCliente = 'Teléfono';
+  static String sFechaNacimiento = 'Fecha de nacimiento';
+  static String sRFC = 'RFC del cliente';
+  static String sErrorNombreCliente = 'El nombre del cliente es obligatorio';
+  static String sErrorEmailCliente = 'El correo del cliente es obligatorio';
+  static String sErrorEmailClienteFormat = 'El formato de correo es inválido';
+  static String sErrorTelefonoCliente =
+      'El teléfono del cliente es obligatorio';
+  static String sErrorFechaCliente =
+      'La fecha de nacimiento del cliente es obligatoria';
 }

@@ -3,7 +3,6 @@ import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
 import 'package:assurance/models/nota_model.dart';
 import 'package:assurance/modules/inicio_notas/pages/create_note_page.dart';
-import 'package:assurance/utils/utils.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
