@@ -18,43 +18,35 @@ class WidgetInputSearchMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-              controller: tec,
-              style: const TextStyle(color: Colors.black),
-              onChanged: onChanged,
-              autofocus: false,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText: hintText,
-                suffix: tec.text.isNotEmpty
-                    ? IconButton(
-                        onPressed: onClear,
-                        icon: Icon(Icons.close),
-                        padding: EdgeInsets.all(0),
-                        visualDensity:
-                            VisualDensity(vertical: -4, horizontal: -4),
-                      )
-                    : IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.search),
-                        padding: EdgeInsets.all(0),
-                        visualDensity:
-                            VisualDensity(vertical: -4, horizontal: -4),
-                      ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white38),
+    return TextField(
+        controller: tec,
+        style: const TextStyle(color: Colors.black),
+        onChanged: onChanged,
+        autofocus: false,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          hintText: hintText,
+          suffix: tec.text.isNotEmpty
+              ? IconButton(
+                  onPressed: onClear,
+                  icon: Icon(Icons.close),
+                  padding: EdgeInsets.all(0),
+                  visualDensity: VisualDensity(vertical: -4, horizontal: -4),
+                )
+              : IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.search),
+                  padding: EdgeInsets.all(0),
+                  visualDensity: VisualDensity(vertical: -4, horizontal: -4),
                 ),
-                labelStyle: const TextStyle(color: Colors.black),
-                hintStyle: const TextStyle(color: Colors.black),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white70),
-                ),
-              )),
-        ),
-      ],
-    );
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white38),
+          ),
+          labelStyle: const TextStyle(color: Colors.black),
+          hintStyle: const TextStyle(color: Colors.black),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70),
+          ),
+        ));
   }
 }
