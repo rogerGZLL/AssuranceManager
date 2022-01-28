@@ -5,7 +5,7 @@ import 'package:assurance/modules/inicio_actividad/pages/actividad_page.dart';
 import 'package:assurance/modules/inicio_clientes/pages/clientes_page.dart';
 import 'package:assurance/modules/inicio_gastos_ingresos/pages/gastos_ingresos_page.dart';
 import 'package:assurance/modules/inicio_notas/pages/notas_page.dart';
-import 'package:assurance/modules/inicio_polizas/pages/polizas_page.dart';
+import 'package:assurance/modules/inicio_polizas/pages/polizas_menu_page.dart';
 import 'package:assurance/modules/inicio_polizas_pendientes/pages/polizas_pendientes_page.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +22,7 @@ class InicioController extends GetxController {
   void toRoutes(String route) {
     switch (route) {
       case 'misPolizas':
-        Get.to(() => PolizasPage());
+        Get.to(() => PolizasMenuPage());
         break;
       case 'misClientes':
         Get.to(() => ClientesPage());

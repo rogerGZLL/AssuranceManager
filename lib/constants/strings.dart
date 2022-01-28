@@ -89,4 +89,7 @@ class Strings {
   static String sEliminarCliente = 'Eliminar cliente';
   static String sEliminarClienteConfirm =
       '¿Seguro que quieres eliminar este cliente?';
+  //Mis polizas
+  static String sAseguradoras = 'Aseguradoras';
+  static String sCrearPoliza = 'Crear nueva póliza';
 }

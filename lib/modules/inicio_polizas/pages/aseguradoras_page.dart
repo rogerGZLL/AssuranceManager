@@ -2,14 +2,14 @@ import 'package:assurance/modules/inicio_polizas/controllers/polizas_controller.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PolizasPage extends StatelessWidget {
+class AseguradorasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PolizasController>(
         init: PolizasController(),
         builder: (_) {
           return Center(
-            child: Text('Polizas'),
+            child: Text('Aseguradoras'),
           );
         });
   }
