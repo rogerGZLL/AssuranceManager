@@ -92,4 +92,33 @@ class Strings {
   //Mis polizas
   static String sAseguradoras = 'Aseguradoras';
   static String sCrearPoliza = 'Crear nueva póliza';
+  static String sNumeroPoliza = 'Número de poliza';
+  static String sRamoPoliza = 'Ramo';
+  static String sAseguradoraPoliza = 'Aseguradora';
+  static String sCoberturaPoliza = 'Cobertura';
+  static String sIncisoPoliza = 'Inciso';
+  static String sInicioPoliza = 'Fecha de inicio';
+  static String sTerminacionPoliza = 'Fecha de terminación';
+  static String sEmisionPoliza = 'Fecha de emisión';
+  static String sPagoPoliza = 'Fecha de pago';
+  static String sFormaPago = 'Forma de pago';
+  static String sMontoPago = 'Monto total';
+  static String sCliente = 'Seleccionar Cliente';
+  static String sClienteExistente = 'Cliente existente';
+  static String sClienteNuevo = 'Cliente nuevo';
+  static String sAutomovil = 'Datos del automóvil';
+  static String sAutomovilMarca = 'Marca';
+  static String sAutomovilTipo = 'Tipo';
+  static String sAutomovilModelo = 'Modelo';
+  static String sAutomovilSerie = 'Serie';
+  static String sAutomovilMotor = 'Motor';
+  static String sAutomovilPlacas = 'Placas';
+  static String sAutomovilResidente = 'Residente';
+  static String sAutomovilLegalizado = 'Legalizado';
+  static String sAutomovilAdaptaciones = 'Adaptaciones';
+  static String sPolizaEstatus = 'Estatus';
+  static String sPolizaEstatusPagado = 'Pagado';
+  static String sPolizaEstatusPeriodoGracia = 'Periodo de gracia';
+  static String sPolizaEstatusVencido = 'Vencido';
+  static String sPolizaEstatusCancelado = 'Cancelada';
 }
