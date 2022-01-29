@@ -30,7 +30,7 @@ class CrearPolizaPage extends StatelessWidget {
                       textCapitalization: TextCapitalization.none,
                       obscureText: false,
                       tit: TextInputType.text,
-                      tec: _.tecPoliza,
+                      tec: _.tecNumeroPoliza,
                       hintText: Strings.sNumeroPoliza),
                   WidgetSelectorMain(
                       label: true,
@@ -83,12 +83,17 @@ class CrearPolizaPage extends StatelessWidget {
                       tit: TextInputType.text,
                       tec: _.tecFormaPago,
                       hintText: Strings.sFormaPago),
+                  WidgetSelectorMain(
+                      label: true,
+                      enabled: true,
+                      tec: _.tecEstatus,
+                      hintText: Strings.sPolizaEstatus),
                   WidgetInputMain(
                       enabled: true,
                       textCapitalization: TextCapitalization.none,
                       obscureText: false,
                       tit: TextInputType.text,
-                      tec: _.tecFormaPago,
+                      tec: _.tecMontoTotal,
                       hintText: Strings.sMontoPago),
                   //Cliente
                   Column(
@@ -168,13 +173,20 @@ class CrearPolizaPage extends StatelessWidget {
                           enabled: true,
                           tec: _.tecAutoLegalizado,
                           hintText: Strings.sAutomovilLegalizado),
+                      WidgetInputMain(
+                          enabled: true,
+                          textCapitalization: TextCapitalization.none,
+                          obscureText: false,
+                          tit: TextInputType.text,
+                          tec: _.tecAutoAdaptaciones,
+                          hintText: Strings.sAutomovilAdaptaciones),
                     ],
                   ),
                   WidgetButtonMain(
                       text: Strings.sGuardar,
                       paddingHorizontal: 0,
                       paddingVertical: 24,
-                      fun: () {})
+                      fun: _.crearPoliza)
                 ],
               ));
         });

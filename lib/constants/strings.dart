@@ -121,4 +121,26 @@ class Strings {
   static String sPolizaEstatusPeriodoGracia = 'Periodo de gracia';
   static String sPolizaEstatusVencido = 'Vencido';
   static String sPolizaEstatusCancelado = 'Cancelada';
+  static String sErrorPolizaNumero = 'Ingresa el número de póliza';
+  static String sErrorPolizaRamo = 'Selecciona un ramo para la póliza';
+  static String sErrorPolizaAseguradora = 'Selecciona una aseguradora';
+  static String sErrorPolizaCobertura = 'Ingresa la cobertura';
+  static String sErrorPolizaInciso = 'Ingresa el inciso';
+  static String sErrorPolizaFechaInicio = 'Selecciona la fecha de inicio';
+  static String sErrorPolizaFechaTerminacion =
+      'Selecciona la fecha de terminación';
+  static String sErrorPolizaFechaEmision = 'Selecciona la fecha de emisión';
+  static String sErrorPolizaFechaPago = 'Selecciona la fecha de pago';
+  static String sErrorPolizaFormaPago = 'Selecciona una forma de pago';
+  static String sErrorPolizaMontoTotal = 'Ingresa el monto total';
+  static String sErrorPolizaCliente = 'Selecciona un cliente';
+  static String sErrorPolizaMarca = 'Ingresa la marca del auto';
+  static String sErrorPolizaTipoAuto = 'Selecciona el tipo de auto';
+  static String sErrorPolizaModeloAuto = 'Ingresa el módelo del auto';
+  static String sErrorPolizaSerieAuto = 'Ingresa la serie del auto';
+  static String sErrorPolizaMotorAuto = 'Ingresa el motor del auto';
+  static String sErrorPolizaPlacasAuto = 'Ingresa las placas del auto';
+  static String sErrorPolizaResidenteAuto = 'Indica si es un auto residente';
+  static String sErrorPolizaLegalizadoAuto = 'Indica si es un auto legalizado';
+  static String sErrorPolizaEstatus = 'Selecciona el estatus de la póliza';
 }
