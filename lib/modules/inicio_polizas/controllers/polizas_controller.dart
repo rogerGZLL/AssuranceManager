@@ -1,4 +1,7 @@
+import 'package:assurance/Firebase/firebase_services.dart';
 import 'package:assurance/constants/strings.dart';
+import 'package:assurance/controllers/global_controller_usuario.dart';
+import 'package:assurance/models/cliente_model.dart';
 import 'package:assurance/modules/inicio_polizas/pages/crear_poliza_page.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class PolizasController extends GetxController {
+  GlobalControllerUsuario globalControllerUsuario =
+      Get.find<GlobalControllerUsuario>();
   //Poliza
   TextEditingController tecNumeroPoliza = TextEditingController();
   TextEditingController tecCobertura = TextEditingController();
@@ -34,11 +39,33 @@ class PolizasController extends GetxController {
   int _segmentedControlValue = 0;
   int get segmentedControlValue => _segmentedControlValue;
   ProgressDialog progressDialog;
+  //Clientes
+  List<Cliente> _listCliente = [];
+  List<Cliente> get listCliente => _listCliente;
 
   @override
   void onReady() {
     super.onReady();
+    obtenerClientes();
     progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
+  }
+
+  void obtenerClientes() {
+    _listCliente.clear();
+    FirebaseServices.databaseReference
+        .child('clientes')
+        .child(globalControllerUsuario.usuario.uid)
+        .once()
+        .then((snap) {
+      _listCliente.clear();
+      if (snap.exists) {
+        snap.value.forEach((key, value) {
+          _listCliente.add(Cliente.fromJson(key, value));
+          print(value);
+        });
+      }
+      update();
+    });
   }
 
   void crearPoliza() {
