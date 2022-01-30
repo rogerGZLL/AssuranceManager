@@ -1,9 +1,12 @@
 import 'package:assurance/Firebase/firebase_services.dart';
+import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
 import 'package:assurance/models/cliente_model.dart';
 import 'package:assurance/modules/inicio_polizas/pages/crear_poliza_page.dart';
+import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_generic_polizas.dart';
 import 'package:assurance/utils/utils_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -42,6 +45,27 @@ class PolizasController extends GetxController {
   //Clientes
   List<Cliente> _listCliente = [];
   List<Cliente> get listCliente => _listCliente;
+  //Constants
+  List<String> listRamo = [
+    Constants.ramoAuto,
+    Constants.ramoHogar,
+    Constants.ramoVida,
+    Constants.ramoSalud,
+  ];
+  List<String> listEstatus = [
+    Constants.estatusPagado,
+    Constants.estatusPeriodoGracia,
+    Constants.estatusVencido,
+    Constants.estatusCancelado,
+  ];
+  List<String> listTipoAuto = [
+    Constants.autoCoche,
+    Constants.autoMoto,
+    Constants.autoCiclomotor,
+    Constants.autoFurgoneta,
+    Constants.autoPickup,
+  ];
+  List<String> listSiNo = ['Si', 'No'];
 
   @override
   void onReady() {
@@ -164,6 +188,47 @@ class PolizasController extends GetxController {
           Get.overlayContext, Strings.sErrorPolizaLegalizadoAuto);
     }
     return valido;
+  }
+
+  void showModalGeneric(String type, String title, List<String> options) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+        context: Get.overlayContext,
+        builder: (_) {
+          return ModalGenericPolizas(
+            type: type,
+            title: title,
+            options: options,
+          );
+        });
+  }
+
+  void selectOption(String type, int index) {
+    switch (type) {
+      case 'ramo':
+        tecRamo.text = listRamo[index];
+        Get.back();
+        break;
+      case 'estatus':
+        tecEstatus.text = listEstatus[index];
+        Get.back();
+        break;
+      case 'tipoAuto':
+        tecAutoTipo.text = listTipoAuto[index];
+        Get.back();
+        break;
+      case 'residente':
+        tecAutoResidente.text = listSiNo[index];
+        Get.back();
+        break;
+      case 'legalizado':
+        tecAutoLegalizado.text = listSiNo[index];
+        Get.back();
+        break;
+    }
+    update();
   }
 
   void selectType(int value) {

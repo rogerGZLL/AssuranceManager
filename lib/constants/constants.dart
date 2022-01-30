@@ -18,4 +18,17 @@ class Constants {
   static String menuNotas = 'notas';
   static String menuActividad = 'miActividad';
   static String menuAbout = 'about';
+  static String ramoAuto = 'Auto';
+  static String ramoHogar = 'Hogar';
+  static String ramoVida = 'Vida';
+  static String ramoSalud = 'Salud';
+  static String estatusPagado = 'Pagado';
+  static String estatusPeriodoGracia = 'Periodo de gracia';
+  static String estatusVencido = 'Vencido';
+  static String estatusCancelado = 'Cancelado';
+  static String autoCoche = 'Coche / SUV';
+  static String autoMoto = 'Moto';
+  static String autoCiclomotor = 'Ciclomotor';
+  static String autoFurgoneta = 'Furgoneta';
+  static String autoPickup = 'Pick up';
 }

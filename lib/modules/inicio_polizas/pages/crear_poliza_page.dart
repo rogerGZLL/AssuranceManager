@@ -1,3 +1,4 @@
+import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/modules/inicio_polizas/controllers/polizas_controller.dart';
 import 'package:assurance/widgets/widget_appbar_main.dart';
@@ -33,6 +34,8 @@ class CrearPolizaPage extends StatelessWidget {
                       tec: _.tecNumeroPoliza,
                       hintText: Strings.sNumeroPoliza),
                   WidgetSelectorMain(
+                      fun: () => _.showModalGeneric(
+                          'ramo', Strings.sErrorPolizaRamo, _.listRamo),
                       label: true,
                       enabled: true,
                       tec: _.tecRamo,
@@ -84,6 +87,8 @@ class CrearPolizaPage extends StatelessWidget {
                       tec: _.tecFormaPago,
                       hintText: Strings.sFormaPago),
                   WidgetSelectorMain(
+                      fun: () => _.showModalGeneric('estatus',
+                          Strings.sErrorPolizaEstatus, _.listEstatus),
                       label: true,
                       enabled: true,
                       tec: _.tecEstatus,
@@ -116,72 +121,86 @@ class CrearPolizaPage extends StatelessWidget {
                     ],
                   ),
                   //Automóvil
-                  Column(
-                    children: [
-                      WidgetMargin(margin: 8),
-                      WidgetTextMain(
-                          text: Strings.sAutomovil,
-                          paddingHorizontal: 24,
-                          paddingVertical: 16),
-                      WidgetInputMain(
-                          enabled: true,
-                          textCapitalization: TextCapitalization.none,
-                          obscureText: false,
-                          tit: TextInputType.text,
-                          tec: _.tecAutoMarca,
-                          hintText: Strings.sAutomovilMarca),
-                      WidgetSelectorMain(
-                          label: true,
-                          enabled: true,
-                          tec: _.tecAutoTipo,
-                          hintText: Strings.sAutomovilTipo),
-                      WidgetInputMain(
-                          enabled: true,
-                          textCapitalization: TextCapitalization.none,
-                          obscureText: false,
-                          tit: TextInputType.text,
-                          tec: _.tecAutoModelo,
-                          hintText: Strings.sAutomovilModelo),
-                      WidgetInputMain(
-                          enabled: true,
-                          textCapitalization: TextCapitalization.none,
-                          obscureText: false,
-                          tit: TextInputType.text,
-                          tec: _.tecAutoSerie,
-                          hintText: Strings.sAutomovilSerie),
-                      WidgetInputMain(
-                          enabled: true,
-                          textCapitalization: TextCapitalization.none,
-                          obscureText: false,
-                          tit: TextInputType.text,
-                          tec: _.tecAutoMotor,
-                          hintText: Strings.sAutomovilMotor),
-                      WidgetInputMain(
-                          enabled: true,
-                          textCapitalization: TextCapitalization.none,
-                          obscureText: false,
-                          tit: TextInputType.text,
-                          tec: _.tecAutoPlacas,
-                          hintText: Strings.sAutomovilPlacas),
-                      WidgetSelectorMain(
-                          label: true,
-                          enabled: true,
-                          tec: _.tecAutoResidente,
-                          hintText: Strings.sAutomovilResidente),
-                      WidgetSelectorMain(
-                          label: true,
-                          enabled: true,
-                          tec: _.tecAutoLegalizado,
-                          hintText: Strings.sAutomovilLegalizado),
-                      WidgetInputMain(
-                          enabled: true,
-                          textCapitalization: TextCapitalization.none,
-                          obscureText: false,
-                          tit: TextInputType.text,
-                          tec: _.tecAutoAdaptaciones,
-                          hintText: Strings.sAutomovilAdaptaciones),
-                    ],
-                  ),
+                  _.tecRamo.text == Constants.ramoAuto
+                      ? Column(
+                          children: [
+                            WidgetMargin(margin: 8),
+                            WidgetTextMain(
+                                text: Strings.sAutomovil,
+                                paddingHorizontal: 24,
+                                paddingVertical: 16),
+                            WidgetInputMain(
+                                enabled: true,
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: false,
+                                tit: TextInputType.text,
+                                tec: _.tecAutoMarca,
+                                hintText: Strings.sAutomovilMarca),
+                            WidgetSelectorMain(
+                                fun: () => _.showModalGeneric(
+                                    'tipoAuto',
+                                    Strings.sErrorPolizaTipoAuto,
+                                    _.listTipoAuto),
+                                label: true,
+                                enabled: true,
+                                tec: _.tecAutoTipo,
+                                hintText: Strings.sAutomovilTipo),
+                            WidgetInputMain(
+                                enabled: true,
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: false,
+                                tit: TextInputType.text,
+                                tec: _.tecAutoModelo,
+                                hintText: Strings.sAutomovilModelo),
+                            WidgetInputMain(
+                                enabled: true,
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: false,
+                                tit: TextInputType.text,
+                                tec: _.tecAutoSerie,
+                                hintText: Strings.sAutomovilSerie),
+                            WidgetInputMain(
+                                enabled: true,
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: false,
+                                tit: TextInputType.text,
+                                tec: _.tecAutoMotor,
+                                hintText: Strings.sAutomovilMotor),
+                            WidgetInputMain(
+                                enabled: true,
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: false,
+                                tit: TextInputType.text,
+                                tec: _.tecAutoPlacas,
+                                hintText: Strings.sAutomovilPlacas),
+                            WidgetSelectorMain(
+                                fun: () => _.showModalGeneric(
+                                    'residente',
+                                    Strings.sErrorPolizaResidenteAuto,
+                                    _.listSiNo),
+                                label: true,
+                                enabled: true,
+                                tec: _.tecAutoResidente,
+                                hintText: Strings.sAutomovilResidente),
+                            WidgetSelectorMain(
+                                fun: () => _.showModalGeneric(
+                                    'legalizado',
+                                    Strings.sErrorPolizaLegalizadoAuto,
+                                    _.listSiNo),
+                                label: true,
+                                enabled: true,
+                                tec: _.tecAutoLegalizado,
+                                hintText: Strings.sAutomovilLegalizado),
+                            WidgetInputMain(
+                                enabled: true,
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: false,
+                                tit: TextInputType.text,
+                                tec: _.tecAutoAdaptaciones,
+                                hintText: Strings.sAutomovilAdaptaciones),
+                          ],
+                        )
+                      : Container(),
                   WidgetButtonMain(
                       text: Strings.sGuardar,
                       paddingHorizontal: 0,
