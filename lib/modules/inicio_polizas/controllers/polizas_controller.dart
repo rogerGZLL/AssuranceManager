@@ -56,7 +56,7 @@ class PolizasController extends GetxController {
   //Clientes
   List<Cliente> _listCliente = [];
   List<Cliente> get listCliente => _listCliente;
-  Cliente clienteSelected = Cliente();
+  String idClienteSelected = '';
   //Aseguradoras
   List<Aseguradora> _listAseguradora = [];
   List<Aseguradora> get listAseguradora => _listAseguradora;
@@ -146,15 +146,19 @@ class PolizasController extends GetxController {
     });
   }
 
-  void crearPoliza() {
+  void crearPoliza({Poliza poliza}) {
     if (validarDatosPoliza()) {
-      crearPolizaFirebase();
+      poliza == null
+          ? crearPolizaFirebase()
+          : crearPolizaFirebase(poliza: poliza);
     }
   }
 
-  void crearPolizaFirebase() {
+  void crearPolizaFirebase({Poliza poliza}) {
     progressDialog.show();
-    String idPoliza = FirebaseServices.databaseReference.push().key;
+    String idPoliza = poliza == null
+        ? FirebaseServices.databaseReference.push().key
+        : poliza.id;
     Map auto = {
       'marca': tecAutoMarca.text,
       'tipo': tecAutoTipo.text,
@@ -179,10 +183,11 @@ class PolizasController extends GetxController {
       'formaPago': tecFormaPago.text,
       'estatus': tecEstatus.text,
       'montoTotal': tecMontoTotal.text,
-      'clienteID': clienteSelected.id,
-      'clienteNombre': clienteSelected.nombre,
+      'clienteID': idClienteSelected,
+      'clienteNombre': tecCliente.text,
     };
     if (tecRamo.text == 'Auto') value['auto'] = auto;
+    print(idPoliza);
     print(value);
     FirebaseServices.databaseReference
         .child('polizas')
@@ -190,6 +195,8 @@ class PolizasController extends GetxController {
         .child(idPoliza)
         .set(value)
         .then((value) {
+      idClienteSelected = '';
+      obtenerPolizas();
       Future.delayed(const Duration(milliseconds: 300)).then((value) {
         progressDialog.hide().whenComplete(() {
           UtilsDialog.alertDialogTwoActions(
@@ -208,6 +215,8 @@ class PolizasController extends GetxController {
       });
     }).catchError((onError) {});
   }
+
+  void eliminarPoliza(int index, Poliza poliza) {}
 
   bool validarDatosPoliza() {
     bool valido = true;
@@ -405,8 +414,8 @@ class PolizasController extends GetxController {
   }
 
   void selectCliente(Cliente cliente, int index) {
-    clienteSelected = cliente;
-    tecCliente.text = clienteSelected.nombre;
+    idClienteSelected = cliente.id;
+    tecCliente.text = cliente.nombre;
     Get.back();
   }
 
@@ -423,6 +432,73 @@ class PolizasController extends GetxController {
 
   void toAddPoliza() {
     _segmentedControlValue == 0 ? Get.to(() => CrearPolizaPage()) : null;
+    cleanDataPolizaEdit();
+  }
+
+  void toEditPoliza(int index, Poliza poliza) {
+    _segmentedControlValue == 0
+        ? Get.to(() => CrearPolizaPage(
+              index: index,
+              poliza: poliza,
+            ))
+        : null;
+    llenarDatosPolizaEdit(poliza);
+  }
+
+  void llenarDatosPolizaEdit(Poliza poliza) {
+    tecNumeroPoliza.text = poliza.numero;
+    tecRamo.text = poliza.ramo;
+    tecAseguradora.text = poliza.aseguradora;
+    tecCobertura.text = poliza.cobertura;
+    tecInciso.text = poliza.inciso;
+    tecFechaInicio.text = poliza.fechaInicio;
+    tecFechaTerminacion.text = poliza.fechaTerminacion;
+    tecFechaEmision.text = poliza.fechaEmision;
+    tecFechaPago.text = poliza.fechaPago;
+    tecFormaPago.text = poliza.formaPago;
+    tecEstatus.text = poliza.estatus;
+    tecMontoTotal.text = poliza.montoTotal;
+    idClienteSelected = poliza.clienteID;
+    tecCliente.text = poliza.clienteNombre;
+    if (poliza.ramo == 'Auto') {
+      tecAutoMarca.text = poliza.auto.marca;
+      tecAutoTipo.text = poliza.auto.tipo;
+      tecAutoModelo.text = poliza.auto.modelo;
+      tecAutoSerie.text = poliza.auto.serie;
+      tecAutoMotor.text = poliza.auto.motor;
+      tecAutoPlacas.text = poliza.auto.placas;
+      tecAutoResidente.text = poliza.auto.esResidente;
+      tecAutoLegalizado.text = poliza.auto.esLegalizado;
+      tecAutoAdaptaciones.text = poliza.auto.adaptaciones;
+    }
+    update();
+  }
+
+  void cleanDataPolizaEdit() {
+    tecNumeroPoliza.text = '';
+    tecRamo.text = '';
+    tecAseguradora.text = '';
+    tecCobertura.text = '';
+    tecInciso.text = '';
+    tecFechaInicio.text = '';
+    tecFechaTerminacion.text = '';
+    tecFechaEmision.text = '';
+    tecFechaPago.text = '';
+    tecFormaPago.text = '';
+    tecEstatus.text = '';
+    tecMontoTotal.text = '';
+    idClienteSelected = '';
+    tecCliente.text = '';
+    tecAutoMarca.text = '';
+    tecAutoTipo.text = '';
+    tecAutoModelo.text = '';
+    tecAutoSerie.text = '';
+    tecAutoMotor.text = '';
+    tecAutoPlacas.text = '';
+    tecAutoResidente.text = '';
+    tecAutoLegalizado.text = '';
+    tecAutoAdaptaciones.text = '';
+    update();
   }
 
   void toAgregarArchivos(String idPoliza) {

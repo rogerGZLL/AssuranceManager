@@ -1,8 +1,10 @@
 import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
+import 'package:assurance/models/poliza_model.dart';
 import 'package:assurance/modules/inicio_polizas/controllers/polizas_controller.dart';
 import 'package:assurance/widgets/widget_appbar_main.dart';
 import 'package:assurance/widgets/widget_button_main.dart';
+import 'package:assurance/widgets/widget_button_secondary.dart';
 import 'package:assurance/widgets/widget_input_main.dart';
 import 'package:assurance/widgets/widget_margin.dart';
 import 'package:assurance/widgets/widget_selector_main.dart';
@@ -11,6 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CrearPolizaPage extends StatelessWidget {
+  final int index;
+  final Poliza poliza;
+
+  const CrearPolizaPage({Key key, this.index, this.poliza}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PolizasController>(
@@ -202,11 +209,21 @@ class CrearPolizaPage extends StatelessWidget {
                           ],
                         )
                       : Container(),
+                  WidgetMargin(margin: 24),
                   WidgetButtonMain(
                       text: Strings.sGuardar,
                       paddingHorizontal: 0,
-                      paddingVertical: 24,
-                      fun: _.crearPoliza)
+                      paddingVertical: 0,
+                      fun: () => poliza == null
+                          ? _.crearPoliza()
+                          : _.crearPoliza(poliza: poliza)),
+                  poliza != null
+                      ? WidgetButtonSecondary(
+                          text: Strings.sEliminar,
+                          color: Colors.red.shade700,
+                          fun: () => _.eliminarPoliza(index, poliza))
+                      : Container(),
+                  WidgetMargin(margin: 24),
                 ],
               ));
         });

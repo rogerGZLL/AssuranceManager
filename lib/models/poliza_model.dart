@@ -2,6 +2,7 @@ import 'package:assurance/models/auto_model.dart';
 
 class Poliza {
   String id;
+  String aseguradora;
   Auto auto;
   String clienteID;
   String clienteNombre;
@@ -20,6 +21,7 @@ class Poliza {
   Poliza();
   Poliza.fromJson(String key, Map value) {
     id = key;
+    aseguradora = value['aseguradora'];
     if (value['auto'] != null) {
       auto = Auto.fromJson(value['auto']);
     }
