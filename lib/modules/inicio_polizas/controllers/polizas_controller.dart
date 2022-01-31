@@ -46,12 +46,16 @@ class PolizasController extends GetxController {
   TextEditingController tecAutoResidente = TextEditingController();
   TextEditingController tecAutoLegalizado = TextEditingController();
   TextEditingController tecAutoAdaptaciones = TextEditingController();
+  final TextEditingController _tecBuscador = TextEditingController();
+  TextEditingController get tecBuscador => _tecBuscador;
   int _segmentedControlValue = 0;
   int get segmentedControlValue => _segmentedControlValue;
   ProgressDialog progressDialog;
   //Polizas
   List<Poliza> _listPoliza = [];
   List<Poliza> get listPoliza => _listPoliza;
+  List<Poliza> _listPolizaBuscador = [];
+  List<Poliza> get listPolizaBuscador => _listPolizaBuscador;
   bool cargando = true;
   //Clientes
   List<Cliente> _listCliente = [];
@@ -82,6 +86,7 @@ class PolizasController extends GetxController {
     Constants.autoPickup,
   ];
   List<String> listSiNo = ['Si', 'No'];
+  RxString buscador = ''.obs;
 
   @override
   void onReady() {
@@ -91,20 +96,49 @@ class PolizasController extends GetxController {
     progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
   }
 
+  void onInputTextChange(String text) {
+    buscador.value = text;
+    if (text == '') {
+      _listPolizaBuscador = _listPoliza;
+    } else {
+      _listPolizaBuscador = _listPoliza
+          .where((el) =>
+                  el.numero.toLowerCase().contains(text.toLowerCase()) ||
+                  el.aseguradora.toLowerCase().contains(text.toLowerCase()) ||
+                  el.clienteNombre.toLowerCase().contains(text.toLowerCase()) ||
+                  el.fechaEmision.toLowerCase().contains(text.toLowerCase()) ||
+                  el.cobertura.toLowerCase().contains(text.toLowerCase()) ||
+                  el.inciso.toLowerCase().contains(text.toLowerCase())
+              /*el.auto.marca.toLowerCase().contains(text) ||
+              el.auto.modelo.toLowerCase().contains(text) ||
+              el.auto.placas.toLowerCase().contains(text)*/
+              )
+          .toList();
+    }
+    update();
+  }
+
+  void cleanBuscador() {
+    _tecBuscador.text = '';
+    buscador.value = '';
+    _listPolizaBuscador = _listPoliza;
+    update();
+  }
+
   void obtenerPolizas() {
     _listPoliza.clear();
+    _listPolizaBuscador.clear();
     FirebaseServices.databaseReference
         .child('polizas')
         .child(globalControllerUsuario.usuario.uid)
         .once()
         .then((snap) {
       _listPoliza.clear();
+      _listPolizaBuscador.clear();
       if (snap.exists) {
         snap.value.forEach((key, value) {
           _listPoliza.add(Poliza.fromJson(key, value));
-        });
-        _listPoliza.forEach((el) {
-          print(el.numero);
+          _listPolizaBuscador = _listPoliza;
         });
       }
       cargando = false;
@@ -170,7 +204,7 @@ class PolizasController extends GetxController {
       'esLegalizado': tecAutoLegalizado.text,
       'adaptaciones': tecAutoAdaptaciones.text
     };
-    Map value = {
+    Map<String, dynamic> value = {
       'numero': tecNumeroPoliza.text,
       'ramo': tecRamo.text,
       'aseguradora': tecAseguradora.text,
@@ -193,26 +227,31 @@ class PolizasController extends GetxController {
         .child('polizas')
         .child(globalControllerUsuario.usuario.uid)
         .child(idPoliza)
-        .set(value)
+        .update(value)
         .then((value) {
       idClienteSelected = '';
       obtenerPolizas();
-      Future.delayed(const Duration(milliseconds: 300)).then((value) {
-        progressDialog.hide().whenComplete(() {
-          UtilsDialog.alertDialogTwoActions(
-              Get.overlayContext,
-              Strings.sPolizaGuardada,
-              Strings.sPolizaGuardadaText,
-              Strings.sNo,
-              Strings.sAgregregarArchivos, () {
-            Get.back();
-            Get.back();
-          }, () {
-            Get.back();
-            toAgregarArchivos(idPoliza);
+      if (poliza == null) {
+        Future.delayed(const Duration(milliseconds: 300)).then((value) {
+          progressDialog.hide().whenComplete(() {
+            UtilsDialog.alertDialogTwoActions(
+                Get.overlayContext,
+                Strings.sPolizaGuardada,
+                Strings.sPolizaGuardadaText,
+                Strings.sNo,
+                Strings.sAgregregarArchivos, () {
+              Get.back();
+              Get.back();
+            }, () {
+              Get.back();
+              toAgregarArchivos(idPoliza);
+            });
           });
         });
-      });
+      } else {
+        Get.back();
+        Get.back();
+      }
     }).catchError((onError) {});
   }
 
@@ -502,7 +541,6 @@ class PolizasController extends GetxController {
   }
 
   void toAgregarArchivos(String idPoliza) {
-    Get.back();
     Get.to(() => AgregarDocumentosPage());
   }
 

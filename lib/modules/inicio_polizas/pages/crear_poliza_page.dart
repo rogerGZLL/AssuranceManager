@@ -1,5 +1,6 @@
 import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
+import 'package:assurance/constants/theme_color.dart';
 import 'package:assurance/models/poliza_model.dart';
 import 'package:assurance/modules/inicio_polizas/controllers/polizas_controller.dart';
 import 'package:assurance/widgets/widget_appbar_main.dart';
@@ -217,6 +218,12 @@ class CrearPolizaPage extends StatelessWidget {
                       fun: () => poliza == null
                           ? _.crearPoliza()
                           : _.crearPoliza(poliza: poliza)),
+                  poliza != null
+                      ? WidgetButtonSecondary(
+                          text: Strings.sArchivos,
+                          color: ThemeColor.colorSecondary,
+                          fun: () => _.toAgregarArchivos(poliza.id))
+                      : Container(),
                   poliza != null
                       ? WidgetButtonSecondary(
                           text: Strings.sEliminar,

@@ -151,4 +151,6 @@ class Strings {
   static String sPolizaGuardadaText =
       'Tu póliza ha sido creada con éxito ¿Deseas agregar archivos para completarla?';
   static String sAgregregarArchivos = 'Agregar archivos';
+  static String sEditarArchivos = 'Agregar archivos';
+  static String sArchivos = 'Archivos';
 }
