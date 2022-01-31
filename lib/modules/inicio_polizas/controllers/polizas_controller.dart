@@ -93,6 +93,23 @@ class PolizasController extends GetxController {
     });
   }
 
+  void obtenerAseguradoras() {
+    _listCliente.clear();
+    FirebaseServices.databaseReference
+        .child('aseguradoras')
+        .orderByChild('name')
+        .once()
+        .then((snap) {
+      _listCliente.clear();
+      if (snap.exists) {
+        snap.value.forEach((key, value) {
+          _listCliente.add(Cliente.fromJson(key, value));
+        });
+      }
+      update();
+    });
+  }
+
   void crearPoliza() {
     if (validarDatosPoliza()) {}
   }
