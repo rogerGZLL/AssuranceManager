@@ -4,6 +4,8 @@ class Strings {
   static String sEliminar = 'Eliminar';
   static String sGuardar = 'Guardar';
   static String sBuscar = 'Buscar...';
+  static String sNo = 'No';
+  static String sSi = 'Si';
   //
   static String appTitle = 'Assurance Manager';
   static String sLoginTitle = 'Iniciar sesión';
@@ -144,4 +146,9 @@ class Strings {
   static String sErrorPolizaLegalizadoAuto = 'Indica si es un auto legalizado';
   static String sErrorPolizaEstatus = 'Selecciona el estatus de la póliza';
   static String sSelectCliente = 'Selecciona un cliente';
+  static String sSelectAseguradora = 'Selecciona una aseguradora';
+  static String sPolizaGuardada = 'Póliza creada';
+  static String sPolizaGuardadaText =
+      'Tu póliza ha sido creada con éxito ¿Deseas agregar archivos para completarla?';
+  static String sAgregregarArchivos = 'Agregar archivos';
 }

@@ -41,6 +41,7 @@ class CrearPolizaPage extends StatelessWidget {
                       tec: _.tecRamo,
                       hintText: Strings.sRamoPoliza),
                   WidgetSelectorMain(
+                      fun: () => _.showModalAseguradora(_.listAseguradora),
                       label: true,
                       enabled: true,
                       tec: _.tecAseguradora,
@@ -60,21 +61,25 @@ class CrearPolizaPage extends StatelessWidget {
                       tec: _.tecInciso,
                       hintText: Strings.sIncisoPoliza),
                   WidgetSelectorMain(
+                      fun: () => _.showModalDatePolizas('fechaInicio'),
                       label: true,
                       enabled: true,
                       tec: _.tecFechaInicio,
                       hintText: Strings.sInicioPoliza),
                   WidgetSelectorMain(
+                      fun: () => _.showModalDatePolizas('fechaTerminacion'),
                       label: true,
                       enabled: true,
                       tec: _.tecFechaTerminacion,
                       hintText: Strings.sTerminacionPoliza),
                   WidgetSelectorMain(
+                      fun: () => _.showModalDatePolizas('fechaEmision'),
                       label: true,
                       enabled: true,
                       tec: _.tecFechaEmision,
                       hintText: Strings.sEmisionPoliza),
                   WidgetSelectorMain(
+                      fun: () => _.showModalDatePolizas('fechaPago'),
                       label: true,
                       enabled: true,
                       tec: _.tecFechaPago,

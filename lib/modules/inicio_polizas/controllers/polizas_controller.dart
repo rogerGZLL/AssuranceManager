@@ -2,10 +2,14 @@ import 'package:assurance/Firebase/firebase_services.dart';
 import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
+import 'package:assurance/models/aseguradora_model.dart';
 import 'package:assurance/models/cliente_model.dart';
 import 'package:assurance/modules/inicio_clientes/pages/crear_cliente_page.dart';
+import 'package:assurance/modules/inicio_polizas/pages/agregar_documentos_page.dart';
 import 'package:assurance/modules/inicio_polizas/pages/crear_poliza_page.dart';
+import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_aseguradoras_polizas.dart';
 import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_clientes_polizas.dart';
+import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_date_polizas.dart';
 import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_generic_polizas.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,6 +52,10 @@ class PolizasController extends GetxController {
   List<Cliente> _listCliente = [];
   List<Cliente> get listCliente => _listCliente;
   Cliente clienteSelected = Cliente();
+  //Aseguradoras
+  List<Aseguradora> _listAseguradora = [];
+  List<Aseguradora> get listAseguradora => _listAseguradora;
+  Aseguradora aseguradoraSelected = Aseguradora();
   //Constants
   List<String> listRamo = [
     Constants.ramoAuto,
@@ -73,6 +81,7 @@ class PolizasController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    obtenerAseguradoras();
     progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
   }
 
@@ -94,16 +103,16 @@ class PolizasController extends GetxController {
   }
 
   void obtenerAseguradoras() {
-    _listCliente.clear();
+    _listAseguradora.clear();
     FirebaseServices.databaseReference
         .child('aseguradoras')
-        .orderByChild('name')
+        .orderByChild('nombre')
         .once()
         .then((snap) {
-      _listCliente.clear();
+      _listAseguradora.clear();
       if (snap.exists) {
         snap.value.forEach((key, value) {
-          _listCliente.add(Cliente.fromJson(key, value));
+          _listAseguradora.add(Aseguradora.fromJson(key, value));
         });
       }
       update();
@@ -111,10 +120,67 @@ class PolizasController extends GetxController {
   }
 
   void crearPoliza() {
-    if (validarDatosPoliza()) {}
+    if (validarDatosPoliza()) {
+      crearPolizaFirebase();
+    }
   }
 
-  void crearPolizaFirebase() {}
+  void crearPolizaFirebase() {
+    progressDialog.show();
+    String idPoliza = FirebaseServices.databaseReference.push().key;
+    Map auto = {
+      'marca': tecAutoMarca.text,
+      'tipo': tecAutoTipo.text,
+      'modelo': tecAutoModelo.text,
+      'serie': tecAutoSerie.text,
+      'motor': tecAutoMotor.text,
+      'placas': tecAutoPlacas.text,
+      'esResidente': tecAutoResidente.text,
+      'esLegalizado': tecAutoLegalizado.text,
+      'adaptaciones': tecAutoAdaptaciones.text
+    };
+    Map value = {
+      'numero': tecNumeroPoliza.text,
+      'ramo': tecRamo.text,
+      'aseguradora': tecAseguradora.text,
+      'cobertura': tecCobertura.text,
+      'inciso': tecInciso.text,
+      'fechaInicio': tecFechaInicio.text,
+      'fechaTerminacion': tecFechaTerminacion.text,
+      'fechaEmision': tecFechaEmision.text,
+      'fechaPago': tecFechaPago.text,
+      'formaPago': tecFormaPago.text,
+      'estatus': tecEstatus.text,
+      'montoTotal': tecMontoTotal.text,
+      'clienteID': clienteSelected.id,
+      'clienteNombre': clienteSelected.nombre,
+    };
+    if (tecRamo.text == 'Auto') value['auto'] = auto;
+    print(value);
+    FirebaseServices.databaseReference
+        .child('polizas')
+        .child(globalControllerUsuario.usuario.uid)
+        .child(idPoliza)
+        .set(value)
+        .then((value) {
+      Future.delayed(const Duration(milliseconds: 300)).then((value) {
+        progressDialog.hide().whenComplete(() {
+          UtilsDialog.alertDialogTwoActions(
+              Get.overlayContext,
+              Strings.sPolizaGuardada,
+              Strings.sPolizaGuardadaText,
+              Strings.sNo,
+              Strings.sAgregregarArchivos, () {
+            Get.back();
+            Get.back();
+          }, () {
+            Get.back();
+            toAgregarArchivos(idPoliza);
+          });
+        });
+      });
+    }).catchError((onError) {});
+  }
 
   bool validarDatosPoliza() {
     bool valido = true;
@@ -162,6 +228,10 @@ class PolizasController extends GetxController {
       valido = false;
       UtilsDialog.alertDialogError(
           Get.overlayContext, Strings.sErrorPolizaEstatus);
+    } else if (tecMontoTotal.text.trim().isEmpty) {
+      valido = false;
+      UtilsDialog.alertDialogError(
+          Get.overlayContext, Strings.sErrorPolizaMontoTotal);
     } else if (tecRamo.text == 'Auto') {
       if (validarDatosAutomovil()) {
         valido = validarDatosAutomovil();
@@ -237,6 +307,29 @@ class PolizasController extends GetxController {
         });
   }
 
+  void showModalAseguradora(List<Aseguradora> listAseguradora) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+        context: Get.overlayContext,
+        builder: (_) {
+          return ModalAseguradorasPolizas(
+            aseguradoras: listAseguradora,
+          );
+        });
+  }
+
+  void showModalDatePolizas(String type) {
+    showCupertinoModalPopup(
+        context: Get.overlayContext,
+        builder: (_) {
+          return ModalDatePolizas(
+            type: type,
+          );
+        });
+  }
+
   void selectOption(String type, int index) {
     switch (type) {
       case 'ramo':
@@ -263,9 +356,36 @@ class PolizasController extends GetxController {
     update();
   }
 
+  void setDateBirth(String date, String type) {
+    String fecha = date.split(' ')[0];
+    String day = fecha.split('-')[2];
+    String month = fecha.split('-')[1];
+    String year = fecha.split('-')[0];
+    switch (type) {
+      case 'fechaInicio':
+        tecFechaInicio.text = day + '-' + month + '-' + year;
+        break;
+      case 'fechaTerminacion':
+        tecFechaTerminacion.text = day + '-' + month + '-' + year;
+        break;
+      case 'fechaEmision':
+        tecFechaEmision.text = day + '-' + month + '-' + year;
+        break;
+      case 'fechaPago':
+        tecFechaPago.text = day + '-' + month + '-' + year;
+        break;
+    }
+  }
+
   void selectCliente(Cliente cliente, int index) {
     clienteSelected = cliente;
     tecCliente.text = clienteSelected.nombre;
+    Get.back();
+  }
+
+  void selectAseguradora(Aseguradora aseguradora, int index) {
+    aseguradoraSelected = aseguradora;
+    tecAseguradora.text = aseguradoraSelected.nombre;
     Get.back();
   }
 
@@ -276,6 +396,11 @@ class PolizasController extends GetxController {
 
   void toAddPoliza() {
     _segmentedControlValue == 0 ? Get.to(() => CrearPolizaPage()) : null;
+  }
+
+  void toAgregarArchivos(String idPoliza) {
+    Get.back();
+    Get.to(() => AgregarDocumentosPage());
   }
 
   void toAddCliente() {
