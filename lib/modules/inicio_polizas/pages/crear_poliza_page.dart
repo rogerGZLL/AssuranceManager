@@ -109,15 +109,11 @@ class CrearPolizaPage extends StatelessWidget {
                           paddingHorizontal: 24,
                           paddingVertical: 16),
                       WidgetSelectorMain(
+                          fun: () => _.showModalClientes(_.listCliente),
                           label: true,
                           enabled: true,
                           tec: _.tecCliente,
                           hintText: Strings.sClienteExistente),
-                      WidgetSelectorMain(
-                          label: true,
-                          enabled: true,
-                          tec: null,
-                          hintText: Strings.sClienteNuevo),
                     ],
                   ),
                   //Automóvil

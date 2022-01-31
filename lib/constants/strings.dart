@@ -143,4 +143,5 @@ class Strings {
   static String sErrorPolizaResidenteAuto = 'Indica si es un auto residente';
   static String sErrorPolizaLegalizadoAuto = 'Indica si es un auto legalizado';
   static String sErrorPolizaEstatus = 'Selecciona el estatus de la póliza';
+  static String sSelectCliente = 'Selecciona un cliente';
 }

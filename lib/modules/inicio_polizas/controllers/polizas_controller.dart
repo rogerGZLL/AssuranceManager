@@ -3,7 +3,9 @@ import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
 import 'package:assurance/models/cliente_model.dart';
+import 'package:assurance/modules/inicio_clientes/pages/crear_cliente_page.dart';
 import 'package:assurance/modules/inicio_polizas/pages/crear_poliza_page.dart';
+import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_clientes_polizas.dart';
 import 'package:assurance/modules/inicio_polizas/pages/polizas_widgets.dart/modal_generic_polizas.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,6 +47,7 @@ class PolizasController extends GetxController {
   //Clientes
   List<Cliente> _listCliente = [];
   List<Cliente> get listCliente => _listCliente;
+  Cliente clienteSelected = Cliente();
   //Constants
   List<String> listRamo = [
     Constants.ramoAuto,
@@ -70,7 +73,6 @@ class PolizasController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    obtenerClientes();
     progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
   }
 
@@ -85,7 +87,6 @@ class PolizasController extends GetxController {
       if (snap.exists) {
         snap.value.forEach((key, value) {
           _listCliente.add(Cliente.fromJson(key, value));
-          print(value);
         });
       }
       update();
@@ -205,6 +206,20 @@ class PolizasController extends GetxController {
         });
   }
 
+  void showModalClientes(List<Cliente> listcliente) {
+    obtenerClientes();
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+        context: Get.overlayContext,
+        builder: (_) {
+          return ModalClientesPolizas(
+            clientes: listCliente,
+          );
+        });
+  }
+
   void selectOption(String type, int index) {
     switch (type) {
       case 'ramo':
@@ -231,6 +246,12 @@ class PolizasController extends GetxController {
     update();
   }
 
+  void selectCliente(Cliente cliente, int index) {
+    clienteSelected = cliente;
+    tecCliente.text = clienteSelected.nombre;
+    Get.back();
+  }
+
   void selectType(int value) {
     _segmentedControlValue = value;
     update();
@@ -238,5 +259,10 @@ class PolizasController extends GetxController {
 
   void toAddPoliza() {
     _segmentedControlValue == 0 ? Get.to(() => CrearPolizaPage()) : null;
+  }
+
+  void toAddCliente() {
+    Get.back();
+    Get.to(() => CrearClientePage());
   }
 }
