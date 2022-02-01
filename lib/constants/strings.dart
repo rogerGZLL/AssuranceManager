@@ -157,6 +157,13 @@ class Strings {
   static String sPDF = 'PDF';
   static String sWord = 'Word';
   static String sExcel = 'Excel';
+  static String sArchivoCargado = 'Archivo cargado';
+  static String sSeleccionarArchivo = 'Seleccionar archivo';
+  static String sErrorFormatFile =
+      'El formato del archivo no es válido, solo se permiten archivos con la extensión jpg, png, pdf, doc, docx, xls y xlsx';
+  static String sArchivoCargadoText = 'El archivo fue cargado con éxito';
+  static String errorUploadFile =
+      'No fue posible subir el archivo, por favor intentalo más tarde';
   static String sSeleccionaArchivo =
-      'Selecciona el tipo de archivo que deseas agregar a esta poliza.';
+      'Puedes seleccionar un archivo con la extensión jpg, png, pdf, doc, docx, xls y xlsx.';
 }

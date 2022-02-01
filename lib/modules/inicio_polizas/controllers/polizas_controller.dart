@@ -562,7 +562,7 @@ class PolizasController extends GetxController {
   }
 
   void toAgregarArchivos(String idPoliza) {
-    Get.to(() => AgregarDocumentosPage());
+    Get.to(() => AgregarDocumentosPage(), arguments: idPoliza);
   }
 
   void toAddCliente() {

@@ -27,7 +27,7 @@ class Utils {
     final result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       outPath,
-      quality: 8,
+      quality: 30,
     );
 
     return result;

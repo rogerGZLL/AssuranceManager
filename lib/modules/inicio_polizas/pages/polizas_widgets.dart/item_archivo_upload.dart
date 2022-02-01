@@ -15,7 +15,6 @@ class ItemArchivoUpload extends StatelessWidget {
     return GetBuilder<PolizasController>(builder: (_) {
       return InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: () {},
         child: Column(
           children: [
             Image.asset(
@@ -23,11 +22,11 @@ class ItemArchivoUpload extends StatelessWidget {
               width: 40,
               height: 40,
             ),
-            WidgetMargin(margin: 8),
+            /*WidgetMargin(margin: 8),
             Text(
               type,
               style: Theme.of(context).textTheme.caption,
-            )
+            )*/
           ],
         ),
       );
