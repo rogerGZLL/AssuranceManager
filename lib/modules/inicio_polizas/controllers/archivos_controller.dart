@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:assurance/Firebase/firebase_services.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
+import 'package:assurance/models/archivo_poliza_model.dart';
 import 'package:assurance/utils/utils.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:file_picker/file_picker.dart';
@@ -12,19 +13,42 @@ class ArchivosController extends GetxController {
   GlobalControllerUsuario globalControllerUsuario =
       Get.find<GlobalControllerUsuario>();
   String idPoliza;
+  bool cargando = true;
+  List<ArchivoPoliza> listArchivoPoliza = [];
   ProgressDialog progressDialog;
-
-  @override
-  void onReady() {
-    super.onReady();
-    progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
-  }
 
   @override
   void onInit() {
     super.onInit();
     idPoliza = Get.arguments as String;
     print(idPoliza);
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    obtenerArchivosPoliza();
+    progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
+  }
+
+  void obtenerArchivosPoliza() {
+    listArchivoPoliza.clear();
+    FirebaseServices.databaseReference
+        .child('polizas')
+        .child(globalControllerUsuario.usuario.uid)
+        .child(idPoliza)
+        .child('archivos')
+        .once()
+        .then((snap) {
+      listArchivoPoliza.clear();
+      if (snap.exists) {
+        snap.value.forEach((key, value) {
+          listArchivoPoliza.add(ArchivoPoliza.fromJson(key, value));
+        });
+      }
+      cargando = false;
+      update();
+    }).catchError((onError) {});
   }
 
   Future<void> selectFile() async {
@@ -116,6 +140,7 @@ class ArchivosController extends GetxController {
         .child(idArchivo)
         .set(value)
         .then((value) {
+      obtenerArchivosPoliza();
       Future.delayed(Duration(milliseconds: 300)).then((value) {
         progressDialog.hide().whenComplete(() {
           UtilsDialog.alertDialogOneAction(

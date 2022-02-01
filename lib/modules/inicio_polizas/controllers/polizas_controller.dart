@@ -265,6 +265,7 @@ class PolizasController extends GetxController {
               Get.back();
             }, () {
               Get.back();
+              Get.back();
               toAgregarArchivos(idPoliza);
             });
           });
