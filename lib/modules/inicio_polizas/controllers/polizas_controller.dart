@@ -48,6 +48,8 @@ class PolizasController extends GetxController {
   TextEditingController tecAutoAdaptaciones = TextEditingController();
   final TextEditingController _tecBuscador = TextEditingController();
   TextEditingController get tecBuscador => _tecBuscador;
+  final TextEditingController _tecBuscadorA = TextEditingController();
+  TextEditingController get tecBuscadorA => _tecBuscadorA;
   int _segmentedControlValue = 0;
   int get segmentedControlValue => _segmentedControlValue;
   ProgressDialog progressDialog;
@@ -64,6 +66,8 @@ class PolizasController extends GetxController {
   //Aseguradoras
   List<Aseguradora> _listAseguradora = [];
   List<Aseguradora> get listAseguradora => _listAseguradora;
+  List<Aseguradora> _listAseguradoraBuscador = [];
+  List<Aseguradora> get listAseguradoraBuscador => _listAseguradoraBuscador;
   Aseguradora aseguradoraSelected = Aseguradora();
   //Constants
   List<String> listRamo = [
@@ -86,7 +90,6 @@ class PolizasController extends GetxController {
     Constants.autoPickup,
   ];
   List<String> listSiNo = ['Si', 'No'];
-  RxString buscador = ''.obs;
 
   @override
   void onReady() {
@@ -97,7 +100,6 @@ class PolizasController extends GetxController {
   }
 
   void onInputTextChange(String text) {
-    buscador.value = text;
     if (text == '') {
       _listPolizaBuscador = _listPoliza;
     } else {
@@ -118,10 +120,26 @@ class PolizasController extends GetxController {
     update();
   }
 
+  void onInputTextChangeAseguradoras(String text) {
+    if (text == '') {
+      _listAseguradoraBuscador = _listAseguradora;
+    } else {
+      _listAseguradoraBuscador = _listAseguradora
+          .where((el) => el.nombre.toLowerCase().contains(text.toLowerCase()))
+          .toList();
+    }
+    update();
+  }
+
   void cleanBuscador() {
     _tecBuscador.text = '';
-    buscador.value = '';
     _listPolizaBuscador = _listPoliza;
+    update();
+  }
+
+  void cleanBuscadorAseguradora() {
+    _tecBuscadorA.text = '';
+    _listAseguradoraBuscador = _listAseguradora;
     update();
   }
 
@@ -165,15 +183,18 @@ class PolizasController extends GetxController {
 
   void obtenerAseguradoras() {
     _listAseguradora.clear();
+    _listAseguradoraBuscador.clear();
     FirebaseServices.databaseReference
         .child('aseguradoras')
         .orderByChild('nombre')
         .once()
         .then((snap) {
       _listAseguradora.clear();
+      _listAseguradoraBuscador.clear();
       if (snap.exists) {
         snap.value.forEach((key, value) {
           _listAseguradora.add(Aseguradora.fromJson(key, value));
+          _listAseguradoraBuscador = _listAseguradora;
         });
       }
       update();

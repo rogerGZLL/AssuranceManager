@@ -153,4 +153,10 @@ class Strings {
   static String sAgregregarArchivos = 'Agregar archivos';
   static String sEditarArchivos = 'Agregar archivos';
   static String sArchivos = 'Archivos';
+  static String sGaleria = 'Imágen';
+  static String sPDF = 'PDF';
+  static String sWord = 'Word';
+  static String sExcel = 'Excel';
+  static String sSeleccionaArchivo =
+      'Selecciona el tipo de archivo que deseas agregar a esta poliza.';
 }
