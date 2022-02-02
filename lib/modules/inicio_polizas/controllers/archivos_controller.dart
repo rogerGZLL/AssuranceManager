@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'package:assurance/Firebase/firebase_services.dart';
-import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
 import 'package:assurance/models/archivo_poliza_model.dart';
 import 'package:assurance/utils/utils.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -78,56 +76,6 @@ class ArchivosController extends GetxController {
             Get.overlayContext, Strings.sErrorFormatFile);
       }
     }
-  }
-
-  String detectTypeFile(String fileName) {
-    String fileType = '';
-    if (fileName.toLowerCase().contains('jpg')) {
-      fileType = 'imagen';
-    } else if (fileName.toLowerCase().contains('jpeg')) {
-      fileType = 'imagen';
-    } else if (fileName.toLowerCase().contains('png')) {
-      fileType = 'imagen';
-    } else if (fileName.toLowerCase().contains('pdf')) {
-      fileType = 'pdf';
-    } else if (fileName.toLowerCase().contains('doc')) {
-      fileType = 'word';
-    } else if (fileName.toLowerCase().contains('docx')) {
-      fileType = 'word';
-    } else if (fileName.toLowerCase().contains('xls')) {
-      fileType = 'excel';
-    } else if (fileName.toLowerCase().contains('xlsx')) {
-      fileType = 'excel';
-    } else {
-      'invalid';
-    }
-    return fileType;
-  }
-
-  String detectExtension(String fileName) {
-    String extension = '';
-
-    if (fileName.toLowerCase().contains('jpg')) {
-      extension = 'jpg';
-    } else if (fileName.toLowerCase().contains('jpeg')) {
-      extension = 'jpeg';
-    } else if (fileName.toLowerCase().contains('png')) {
-      extension = 'png';
-    } else if (fileName.toLowerCase().contains('pdf')) {
-      extension = 'pdf';
-    } else if (fileName.toLowerCase().contains('doc')) {
-      extension = 'doc';
-    } else if (fileName.toLowerCase().contains('docx')) {
-      extension = 'docx';
-    } else if (fileName.toLowerCase().contains('xls')) {
-      extension = 'xls';
-    } else if (fileName.toLowerCase().contains('xlsx')) {
-      extension = 'xlsx';
-    } else {
-      'invalid';
-    }
-
-    return extension;
   }
 
   uploadFileStorage(File file, String fileName, String type) {
@@ -232,6 +180,56 @@ class ArchivosController extends GetxController {
     }, () {
       Get.back();
     });
+  }
+
+  String detectTypeFile(String fileName) {
+    String fileType = '';
+    if (fileName.toLowerCase().contains('jpg')) {
+      fileType = 'imagen';
+    } else if (fileName.toLowerCase().contains('jpeg')) {
+      fileType = 'imagen';
+    } else if (fileName.toLowerCase().contains('png')) {
+      fileType = 'imagen';
+    } else if (fileName.toLowerCase().contains('pdf')) {
+      fileType = 'pdf';
+    } else if (fileName.toLowerCase().contains('doc')) {
+      fileType = 'word';
+    } else if (fileName.toLowerCase().contains('docx')) {
+      fileType = 'word';
+    } else if (fileName.toLowerCase().contains('xls')) {
+      fileType = 'excel';
+    } else if (fileName.toLowerCase().contains('xlsx')) {
+      fileType = 'excel';
+    } else {
+      'invalid';
+    }
+    return fileType;
+  }
+
+  String detectExtension(String fileName) {
+    String extension = '';
+
+    if (fileName.toLowerCase().contains('jpg')) {
+      extension = 'jpg';
+    } else if (fileName.toLowerCase().contains('jpeg')) {
+      extension = 'jpeg';
+    } else if (fileName.toLowerCase().contains('png')) {
+      extension = 'png';
+    } else if (fileName.toLowerCase().contains('pdf')) {
+      extension = 'pdf';
+    } else if (fileName.toLowerCase().contains('doc')) {
+      extension = 'doc';
+    } else if (fileName.toLowerCase().contains('docx')) {
+      extension = 'docx';
+    } else if (fileName.toLowerCase().contains('xls')) {
+      extension = 'xls';
+    } else if (fileName.toLowerCase().contains('xlsx')) {
+      extension = 'xlsx';
+    } else {
+      'invalid';
+    }
+
+    return extension;
   }
 
   void toArchivoDetail(ArchivoPoliza archivoPoliza) async {

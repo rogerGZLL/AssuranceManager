@@ -55,7 +55,7 @@ class ClientesController extends GetxController {
     super.onReady();
     obtenerClientes();
     progressDialog = UtilsDialog.showProgresDialog(Get.overlayContext, false);
-    llenarDatos();
+    //llenarDatos();
   }
 
   void llenarDatos() {
