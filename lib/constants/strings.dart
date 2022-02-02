@@ -174,4 +174,10 @@ class Strings {
       'La poliza se eliminó de forma correcta';
   static String sEliminarPolizaConfirm =
       '¿Estás seguro que deseas eliminar esta póliza?';
+  static String sEliminrArchivoPoliza = 'Eliminar archivo';
+  static String sEliminrArchivoPolizaComfirm = '¿Deseas eliminar este archivo?';
+  static String sArchivoEliminado = 'Archivo eliminado';
+  static String sArchivoEliminadoText = 'El archivo fue eliminado con éxito';
+  static String sArchivoEliminadoError =
+      'No fue posible eliminar el archivo, por favor intentalo más tarde';
 }

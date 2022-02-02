@@ -300,9 +300,7 @@ class PolizasController extends GetxController {
             FirebaseServices.storageReference.storage
                 .refFromURL(archivoPoliza.url)
                 .delete()
-                .then((value) {
-              print('Eliminada');
-            });
+                .then((value) {});
           });
         }
         eliminarPolizaFirebase(index, poliza);

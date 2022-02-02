@@ -1,13 +1,16 @@
 import 'dart:io';
 import 'package:assurance/Firebase/firebase_services.dart';
+import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
 import 'package:assurance/models/archivo_poliza_model.dart';
 import 'package:assurance/utils/utils.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArchivosController extends GetxController {
   GlobalControllerUsuario globalControllerUsuario =
@@ -101,6 +104,32 @@ class ArchivosController extends GetxController {
     return fileType;
   }
 
+  String detectExtension(String fileName) {
+    String extension = '';
+
+    if (fileName.toLowerCase().contains('jpg')) {
+      extension = 'jpg';
+    } else if (fileName.toLowerCase().contains('jpeg')) {
+      extension = 'jpeg';
+    } else if (fileName.toLowerCase().contains('png')) {
+      extension = 'png';
+    } else if (fileName.toLowerCase().contains('pdf')) {
+      extension = 'pdf';
+    } else if (fileName.toLowerCase().contains('doc')) {
+      extension = 'doc';
+    } else if (fileName.toLowerCase().contains('docx')) {
+      extension = 'docx';
+    } else if (fileName.toLowerCase().contains('xls')) {
+      extension = 'xls';
+    } else if (fileName.toLowerCase().contains('xlsx')) {
+      extension = 'xlsx';
+    } else {
+      'invalid';
+    }
+
+    return extension;
+  }
+
   uploadFileStorage(File file, String fileName, String type) {
     progressDialog.show();
     String idArchivo = FirebaseServices.databaseReference.push().key;
@@ -109,7 +138,7 @@ class ArchivosController extends GetxController {
         .child(globalControllerUsuario.usuario.uid)
         .child(idPoliza)
         .child('archivos')
-        .child(idArchivo)
+        .child(idArchivo + '.' + detectExtension(fileName))
         .putFile(file)
         .then((snap) {
       snap.ref.getDownloadURL().then((url) {
@@ -152,5 +181,62 @@ class ArchivosController extends GetxController {
         });
       });
     });
+  }
+
+  void eliminarArchivo(int index, ArchivoPoliza archivoPoliza) {
+    UtilsDialog.alertDialogTwoActions(
+        Get.overlayContext,
+        Strings.sEliminrArchivoPoliza,
+        Strings.sEliminrArchivoPolizaComfirm,
+        Strings.sEliminar,
+        Strings.sCancelar, () {
+      Get.back();
+      progressDialog.show();
+      FirebaseServices.storageReference.storage
+          .refFromURL(archivoPoliza.url)
+          .delete()
+          .then((value) {
+        FirebaseServices.databaseReference
+            .child('polizas')
+            .child(globalControllerUsuario.usuario.uid)
+            .child(idPoliza)
+            .child('archivos')
+            .child(archivoPoliza.id)
+            .remove()
+            .then((value) {
+          listArchivoPoliza.removeAt(index);
+          update();
+          Future.delayed(Duration(milliseconds: 300)).then((value) {
+            progressDialog.hide().whenComplete(() {
+              UtilsDialog.alertDialogOneAction(
+                  Get.overlayContext,
+                  Strings.sArchivoEliminado,
+                  Strings.sArchivoEliminadoText,
+                  Strings.sAceptar,
+                  () => Get.back());
+            });
+          });
+        }).catchError((onError) {});
+      }).catchError((onError) {
+        Future.delayed(Duration(milliseconds: 300)).then((value) {
+          progressDialog.hide().whenComplete(() {
+            UtilsDialog.alertDialogOneAction(
+                Get.overlayContext,
+                Strings.sError,
+                Strings.sArchivoEliminadoError,
+                Strings.sAceptar,
+                () => Get.back());
+          });
+        });
+      });
+    }, () {
+      Get.back();
+    });
+  }
+
+  void toArchivoDetail(ArchivoPoliza archivoPoliza) async {
+    launch(
+      archivoPoliza.url,
+    );
   }
 }

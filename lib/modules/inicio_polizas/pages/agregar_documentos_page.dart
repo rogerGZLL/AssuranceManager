@@ -34,6 +34,7 @@ class AgregarDocumentosPage extends StatelessWidget {
                     paddingVertical: 0),
                 WidgetMargin(margin: 24),
                 Card(
+                  shadowColor: Colors.black45,
                   elevation: 8,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),

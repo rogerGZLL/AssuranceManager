@@ -2,6 +2,8 @@ class Constants {
   static String icBase = 'assets/img/';
   static String urlProfileGeneric =
       'https://firebasestorage.googleapis.com/v0/b/assurance-manager.appspot.com/o/profile-user.png?alt=media&token=963cd8ca-2de2-48d8-981a-2a6a31e48ebe';
+  static String googleDriveLoad =
+      'http://drive.google.com/viewerng/viewer?embedded=true&url=';
   static String icLogo = icBase + 'logo.jpeg';
   static String icLogoLarge = icBase + 'logo_large.jpg';
   static String icMisPolizas = icBase + 'ic_mis_polizas.png';
@@ -15,6 +17,7 @@ class Constants {
   static String icPdf = icBase + 'pdf.png';
   static String icWord = icBase + 'word.png';
   static String icExcel = icBase + 'excel.png';
+  static String icDocumento = icBase + 'documento.png';
   static String menuMisPolizas = 'misPolizas';
   static String menuMisClientes = 'misClientes';
   static String menuPolizasPendientes = 'polizasPendientes';

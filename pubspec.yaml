@@ -46,6 +46,7 @@ dependencies:
   progress_dialog: ^1.2.4
   image_picker: ^0.8.2
   file_picker: ^4.3.3
+  url_launcher: ^6.0.9
 
 dev_dependencies:
   flutter_test:

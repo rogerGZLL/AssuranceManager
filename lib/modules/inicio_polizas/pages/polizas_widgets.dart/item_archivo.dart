@@ -16,12 +16,14 @@ class ItemArchivo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ArchivosController>(builder: (_) {
       return Card(
+        shadowColor: Colors.black45,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         elevation: 4,
         clipBehavior: Clip.antiAlias,
         margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         child: ListTile(
-          onTap: () {},
+          contentPadding: EdgeInsets.only(left: 16),
+          onTap: () => _.toArchivoDetail(archivoPoliza),
           leading: Image.asset(
             archivoPoliza.tipo == 'imagen'
                 ? Constants.icGallery
@@ -31,9 +33,19 @@ class ItemArchivo extends StatelessWidget {
                         ? Constants.icWord
                         : archivoPoliza.tipo == 'excel'
                             ? Constants.icExcel
-                            : Constants.icLogo,
+                            : Constants.icDocumento,
             width: 40,
             height: 40,
+          ),
+          trailing: IconButton(
+            visualDensity: VisualDensity(vertical: -4, horizontal: -4),
+            onPressed: () {
+              _.eliminarArchivo(index, archivoPoliza);
+            },
+            icon: Icon(
+              Icons.delete,
+              color: Colors.red.shade900,
+            ),
           ),
           title: Text(
             archivoPoliza.nombre,
