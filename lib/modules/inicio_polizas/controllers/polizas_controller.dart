@@ -2,6 +2,7 @@ import 'package:assurance/Firebase/firebase_services.dart';
 import 'package:assurance/constants/constants.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
+import 'package:assurance/models/archivo_poliza_model.dart';
 import 'package:assurance/models/aseguradora_model.dart';
 import 'package:assurance/models/cliente_model.dart';
 import 'package:assurance/models/poliza_model.dart';
@@ -277,7 +278,63 @@ class PolizasController extends GetxController {
     }).catchError((onError) {});
   }
 
-  void eliminarPoliza(int index, Poliza poliza) {}
+  void eliminarPoliza(int index, Poliza poliza) {
+    UtilsDialog.alertDialogTwoActions(
+        Get.overlayContext,
+        Strings.sEliminarPoliza,
+        Strings.sEliminarPolizaConfirm,
+        Strings.sEliminar,
+        Strings.sCancelar, () {
+      Get.back();
+      progressDialog.show();
+      FirebaseServices.databaseReference
+          .child('polizas')
+          .child(globalControllerUsuario.usuario.uid)
+          .child(poliza.id)
+          .child('archivos')
+          .once()
+          .then((snap) {
+        if (snap.exists) {
+          snap.value.forEach((key, value) {
+            ArchivoPoliza archivoPoliza = ArchivoPoliza.fromJson(key, value);
+            FirebaseServices.storageReference.storage
+                .refFromURL(archivoPoliza.url)
+                .delete()
+                .then((value) {
+              print('Eliminada');
+            });
+          });
+        }
+        eliminarPolizaFirebase(index, poliza);
+      });
+    }, () {
+      Get.back();
+    });
+  }
+
+  void eliminarPolizaFirebase(int index, Poliza poliza) {
+    FirebaseServices.databaseReference
+        .child('polizas')
+        .child(globalControllerUsuario.usuario.uid)
+        .child(poliza.id)
+        .remove()
+        .then((value) {
+      Future.delayed(Duration(milliseconds: 300)).then((value) {
+        progressDialog.hide().whenComplete(() {
+          _listPoliza.removeAt(index);
+          update();
+          Get.back();
+        });
+      });
+    }).catchError((onError) {
+      Future.delayed(Duration(milliseconds: 300)).then((value) {
+        progressDialog.hide().whenComplete(() {
+          UtilsDialog.alertDialogError(
+              Get.overlayContext, Strings.sEliminarPolizaError);
+        });
+      });
+    });
+  }
 
   bool validarDatosPoliza() {
     bool valido = true;

@@ -166,4 +166,12 @@ class Strings {
       'No fue posible subir el archivo, por favor intentalo más tarde';
   static String sSeleccionaArchivo =
       'Puedes seleccionar un archivo con la extensión jpg, png, pdf, doc, docx, xls y xlsx.';
+  static String sEliminarPoliza = 'Eliminar póliza';
+  static String sPolizaEliminada = 'Póliza eliminada';
+  static String sEliminarPolizaError =
+      'Error al aliminar la poliza, por favor intentalo más tarde';
+  static String sEliminarPolizaSuccess =
+      'La poliza se eliminó de forma correcta';
+  static String sEliminarPolizaConfirm =
+      '¿Estás seguro que deseas eliminar esta póliza?';
 }
