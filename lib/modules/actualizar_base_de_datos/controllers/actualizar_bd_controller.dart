@@ -48,15 +48,16 @@ class ActualizarBdController extends GetxController {
 
 
   Future uploadFile() async{
-    final result = await FilePicker.platform.pickFiles(
+    /*final result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.custom,
         allowedExtensions: ['xlsx']
-    );
+    );*/
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if(result==null) return;
-    //final path = result.files.single.path;
-    //file = File(path);
-    files = result.files as List<File>;
+    final path = result.files.single.path;
+    file = File(path);
+    //files = result.files as List<File>;
   }
 
 
@@ -92,11 +93,11 @@ class ActualizarBdController extends GetxController {
   void actualizar() {
     Map map;
     String smap = "{polizas: {";
-    var file = "Path_to_pre_existing_Excel_File/excel_file.xlsx";
-    var bytes = File(file).readAsBytesSync();
+    //var sfile = "Path_to_pre_existing_Excel_File/excel_file.xlsx";
+    var bytes = File(file.path).readAsBytesSync();
     var excel = Excel.decodeBytes(bytes);
     List polizas = [];    // Obtener de firebase
-    for (var table in excel.tables.keys) {
+    for (var table in excel.tables.keys) {    // table es la aseguradora en cuestión
       List<List<dynamic>> rows = excel.tables[table].rows;
       for(int i=0; i<excel.tables[table].rows.length; i++){
         smap += 'id: ' + polizas[0] + '{';    // Obtener el id de la póliza
@@ -139,7 +140,7 @@ class ActualizarBdController extends GetxController {
             if(!rows[i][11].isEmpty) smap += 'montoTotal: ' + (rows[i][11] as String) + ', ';
             if(!rows[i][12].isEmpty) smap += 'cliente: ' + (rows[i][12] as String) + '}';
         }
-        if(i<rows.length-1) smap += '}';
+        if(i<rows.length-1) smap += '}, ';
         else smap += '}}';
       }
     }
