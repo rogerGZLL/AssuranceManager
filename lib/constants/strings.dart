@@ -46,4 +46,7 @@ class Strings {
   static String sAdministrarColumnasFilas = 'Administrar columnas y filas';
   static String sNoActualizar = 'Elegir qué pólizas no actualizar';
   static String sActualizar = 'Actualizar';
+  static List Aseguradoras = ['GNP', 'AXA', 'ANASEGUROS', 'QUALITAS', 'CHUBB', 'ARGOS', 'GMX',
+    'AFIRME', 'MAPFRE', 'Chubb', 'Atlas', 'Liberty', 'Mapfre'
+  ];
 }

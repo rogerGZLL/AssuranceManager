@@ -56,23 +56,10 @@ class ActualizarBdPage extends StatelessWidget {
                           _.openFile;
                         },
                         (int i){
-                          _.selectedFiles.add(i);
                           _.longPressFile;
                         }),
                     const WidgetMargin(margin: margin),
                     Divider(),
-                    const WidgetMargin(margin: margin),
-                    WidgetButtonMain(
-                        text: Strings.sAdministrarColumnasFilas,
-                        paddingHorizontal: 0,
-                        paddingVertical: 0,
-                        fun: _.manageRowsColumns),
-                    const WidgetMargin(margin: margin),
-                    WidgetButtonMain(
-                        text: Strings.sNoActualizar,
-                        paddingHorizontal: 0,
-                        paddingVertical: 0,
-                        fun: _.elegirPolizasNoActualizar),
                     const WidgetMargin(margin: margin),
                     Expanded( child: Row(
                       children: [
@@ -85,8 +72,8 @@ class ActualizarBdPage extends StatelessWidget {
                           const WidgetMargin(margin: margin),
                           WidgetButton3.button(
                             context,
-                            Strings.sCancelar,
-                            _.cancelar,
+                            Strings.sActualizar,
+                            _.actualizar,
                             Colors.green,
                             Colors.white),
                           const WidgetMargin(margin: margin),
