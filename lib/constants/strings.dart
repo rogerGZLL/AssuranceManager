@@ -61,6 +61,7 @@ class Strings {
   static String sMisClientes = 'Mis clientes';
   static String sPolizasPendientes = 'Pólizas pendientes';
   static String sGastosIngresos = 'Mis gastos e ingresos';
+  static String sBaseDatos = 'Actualizar la base de datos';
   static String sNotas = 'Notas';
   static String sMiActividad = 'Mi actividad';
   static String sAcercaDe = 'Acerca de nosotros';

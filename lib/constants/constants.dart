@@ -12,6 +12,7 @@ class Constants {
   static String icGastosIngresos = icBase + 'ic_gastos_ingresos.png';
   static String icNotas = icBase + 'ic_notas.png';
   static String icMiActividad = icBase + 'ic_mi_actividad.png';
+  static String icBaseDatos = icBase + 'ic_base_datos.png';
   static String icAbout = icBase + 'ic_about.png';
   static String icGallery = icBase + 'gallery.png';
   static String icPdf = icBase + 'pdf.png';
@@ -22,6 +23,7 @@ class Constants {
   static String menuMisClientes = 'misClientes';
   static String menuPolizasPendientes = 'polizasPendientes';
   static String menuGastosIngresos = 'gastosIngresos';
+  static String menuBaseDatos = 'baseDatos';
   static String menuNotas = 'notas';
   static String menuActividad = 'miActividad';
   static String menuAbout = 'about';

@@ -39,6 +39,11 @@ class MainMenu extends StatelessWidget {
           ),
           WidgetMargin(margin: 16),
           MainMenuItem(
+              title: Strings.sBaseDatos,
+              img: Constants.icBaseDatos,
+              fun: () => _.toRoutes(Constants.menuBaseDatos)),
+          WidgetMargin(margin: 16),
+          MainMenuItem(
               title: Strings.sGastosIngresos,
               img: Constants.icGastosIngresos,
               fun: () => _.toRoutes(Constants.menuGastosIngresos)),
