@@ -181,4 +181,7 @@ class Strings {
   static String sArchivoEliminadoText = 'El archivo fue eliminado con éxito';
   static String sArchivoEliminadoError =
       'No fue posible eliminar el archivo, por favor intentalo más tarde';
+  static String sImportarExcel = 'Importar excel';
+  static String sImportandoError =
+      'Espera a que tu archivo termine de importarse';
 }
