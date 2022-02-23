@@ -1,13 +1,13 @@
 class Auto {
-  String adaptaciones;
-  String esLegalizado;
-  String esResidente;
-  String marca;
-  String modelo;
-  String motor;
-  String placas;
-  String serie;
-  String tipo;
+  String adaptaciones = '';
+  String esLegalizado = '';
+  String esResidente = '';
+  String marca = '';
+  String modelo = '';
+  String motor = '';
+  String placas = '';
+  String serie = '';
+  String tipo = '';
 
   Auto();
   Auto.fromJson(Map value) {

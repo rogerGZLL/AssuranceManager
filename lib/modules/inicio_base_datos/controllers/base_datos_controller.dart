@@ -55,18 +55,18 @@ class BaseDatosController extends GetxController {
       /*print('Table - ' + table); //sheet Name
       print('Max cols - ' + excel.tables[table].maxCols.toString());
       print('Max rows - ' + excel.tables[table].maxRows.toString());
-      print('------------------');*/
-      /* for (var row in excel.tables[table].rows) {
+      print('------------------');
+      for (var row in excel.tables[table].rows) {
         print("$row");
       }*/
     }
-    readSheet('GNP Autos');
+    //readSheet('GNP Autos');
   }
 
   void readSheet(String table) {
     var sheet = excel[table];
-    print(sheet.maxCols);
-    print(sheet.maxRows);
+    /*print(sheet.maxCols);
+    print(sheet.maxRows);*/
     List<Map> listMap = [];
     Map<String, dynamic> datosFirebase = Map();
 
@@ -76,42 +76,153 @@ class BaseDatosController extends GetxController {
       String ejecutivo;
       String rfc = '';
       String fechaNacimiento = '';
+      String mes = '';
+      String telefono = '';
+      String correo = '';
+      String poliza = '';
+      String cobertura = '';
+      Map auto = {};
+      String vigenciaInicio = '';
+      String vigenciaFin = '';
+      String total = '';
+      String formaPago = '';
+
       if (row[1] != null) {
-        if (row[1].value.toString().isNotEmpty) {
-          if (row[1].value.toString().toLowerCase().trim() != 'asegurado') {
+        if (row[1].rowIndex > 3) {
+          if (row[1].value.toString().isNotEmpty) {
             nombre = row[1].value.toString();
           }
         }
       }
       if (row[2] != null) {
-        if (row[2].value.toString().isNotEmpty) {
-          if (row[2].value.toString().toLowerCase().trim() != 'ejecutivo') {
+        if (row[2].rowIndex > 3) {
+          if (row[2].value.toString().isNotEmpty) {
             ejecutivo = row[2].value.toString();
           }
         }
       }
       if (row[3] != null) {
-        if (row[3].value.toString().isNotEmpty) {
-          if (row[3].value.toString().toLowerCase().trim() != 'r.f.c') {
+        if (row[3].rowIndex > 3) {
+          if (row[3].value.toString().isNotEmpty) {
             rfc = row[3].value.toString();
           }
         }
       }
       if (row[4] != null) {
-        if (row[4].value.toString().isNotEmpty) {
-          if (row[4].value.toString().toLowerCase().trim() !=
-              'fecha nacimiento') {
+        if (row[4].rowIndex > 3) {
+          if (row[4].value.toString().isNotEmpty) {
             fechaNacimiento = row[4].value.toString();
+          }
+        }
+      }
+      if (row[5] != null) {
+        if (row[5].rowIndex > 3) {
+          if (row[5].value.toString().isNotEmpty) {
+            mes = row[5].value.toString();
+          }
+        }
+      }
+      if (row[6] != null) {
+        if (row[6].rowIndex > 3) {
+          if (row[6].value.toString().isNotEmpty) {
+            telefono = row[6].value.toString();
+          }
+        }
+      }
+      if (row[7] != null) {
+        if (row[7].rowIndex > 3) {
+          if (row[7].value.toString().isNotEmpty) {
+            correo = row[7].value.toString();
+          }
+        }
+      }
+      if (row[9] != null) {
+        if (row[9].rowIndex > 3) {
+          if (row[9].value.toString().isNotEmpty) {
+            poliza = row[9].value.toString();
+          }
+        }
+      }
+      if (row[9] != null) {
+        if (row[9].rowIndex > 3) {
+          if (row[9].value.toString().isNotEmpty) {
+            poliza = row[9].value.toString();
+          }
+        }
+      }
+      if (row[11] != null) {
+        if (row[11].rowIndex > 3) {
+          if (row[11].value.toString().isNotEmpty) {
+            cobertura = row[11].value.toString();
+          }
+        }
+      }
+      /*if (row[12] != null) {
+        if (row[12].rowIndex > 3) {
+          if (row[12].value.toString().isNotEmpty) {
+            auto = {
+              'adaptaciones': row[14].value.toString(),
+              'esLegalizado': '',
+              'esResidente': '',
+              'marca': row[12].value.toString(),
+              'modelo': row[15].value.toString(),
+              'motor': '',
+              'placas': '',
+              'serie': '',
+              'tipo': row[13].value.toString(),
+            };
+          }
+        }
+      }*/
+      if (row[16] != null) {
+        if (row[16].rowIndex > 3) {
+          if (row[16].value.toString().isNotEmpty) {
+            vigenciaInicio = row[16].value.toString();
+          }
+        }
+      }
+      if (row[17] != null) {
+        if (row[17].rowIndex > 3) {
+          if (row[17].value.toString().isNotEmpty) {
+            vigenciaFin = row[17].value.toString();
+          }
+        }
+      }
+      if (row[19] != null) {
+        if (row[19].rowIndex > 3) {
+          if (row[19].value.toString().isNotEmpty) {
+            formaPago = row[19].value.toString();
+          }
+        }
+      }
+      if (row[32] != null) {
+        if (row[32].rowIndex > 3) {
+          if (row[32].value.toString().isNotEmpty) {
+            Formula formula = row[32].props[0];
+
+            total = formula.formula;
+            //total = row[32].
           }
         }
       }
       if (nombre != null && ejecutivo != null) {
         dato = {
           'aseguradora': table,
-          'nombre': nombre,
+          'clienteNombre': nombre,
           'ejecutivo': ejecutivo,
-          'rfc': rfc,
-          'fechaNacimiento': fechaNacimiento,
+          'clienteRFC': rfc,
+          'clienteFechaNacimiento': fechaNacimiento,
+          'fechaPago': mes,
+          'clienteTelefono': telefono,
+          'clienteCorreo': correo,
+          'numero': poliza,
+          'cobertura': cobertura,
+          'auto': auto,
+          'fechaInicio': vigenciaInicio,
+          'fechaTerminacion': vigenciaFin,
+          'montoTotal': total,
+          'formaPago': formaPago,
+          'from': 'excel',
         };
         listMap.add(dato);
       }
@@ -122,14 +233,14 @@ class BaseDatosController extends GetxController {
       datosFirebase[id] = dato;
     });
 
-    uploadDataFirebase(datosFirebase);
+    uploadPolizasFirebase(datosFirebase);
   }
 
-  void uploadDataFirebase(Map<String, dynamic> data) {
-    print(data);
-    print('--------------');
+  void uploadPolizasFirebase(Map<String, dynamic> data) {
+    /*print(data);
+    print('--------------');*/
     FirebaseServices.databaseReference
-        .child('excelDatabase')
+        .child('excelPolizas')
         .child(globalControllerUsuario.usuario.uid)
         .update(data);
   }

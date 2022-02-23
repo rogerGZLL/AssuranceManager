@@ -215,6 +215,10 @@ class PolizasController extends GetxController {
     String idPoliza = poliza == null
         ? FirebaseServices.databaseReference.push().key
         : poliza.id;
+    String ejecutivo = poliza == null
+        ? globalControllerUsuario.usuario.nombre
+        : poliza.ejecutivo;
+    String from = poliza == null ? 'app' : poliza.from;
     Map auto = {
       'marca': tecAutoMarca.text,
       'tipo': tecAutoTipo.text,
@@ -241,6 +245,8 @@ class PolizasController extends GetxController {
       'montoTotal': tecMontoTotal.text,
       'clienteID': idClienteSelected,
       'clienteNombre': tecCliente.text,
+      'ejecutivo': ejecutivo,
+      'from': from
     };
     if (tecRamo.text == 'Auto') value['auto'] = auto;
     print(idPoliza);
@@ -445,18 +451,23 @@ class PolizasController extends GetxController {
         });
   }
 
-  void showModalClientes(List<Cliente> listcliente) {
-    obtenerClientes();
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-        context: Get.overlayContext,
-        builder: (_) {
-          return ModalClientesPolizas(
-            clientes: listCliente,
-          );
-        });
+  void showModalClientes(List<Cliente> listcliente, {Poliza poliza}) {
+    if (poliza == null) {
+      obtenerClientes();
+      showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+          context: Get.overlayContext,
+          builder: (_) {
+            return ModalClientesPolizas(
+              clientes: listCliente,
+            );
+          });
+    } else {
+      UtilsDialog.alertDialogError(
+          Get.overlayContext, Strings.sErrorClienteModificacion);
+    }
   }
 
   void showModalAseguradora(List<Aseguradora> listAseguradora) {

@@ -122,7 +122,12 @@ class CrearPolizaPage extends StatelessWidget {
                           paddingHorizontal: 24,
                           paddingVertical: 16),
                       WidgetSelectorMain(
-                          fun: () => _.showModalClientes(_.listCliente),
+                          fun: () => poliza != null
+                              ? _.showModalClientes(_.listCliente,
+                                  poliza: poliza)
+                              : _.showModalClientes(
+                                  _.listCliente,
+                                ),
                           label: true,
                           enabled: true,
                           tec: _.tecCliente,

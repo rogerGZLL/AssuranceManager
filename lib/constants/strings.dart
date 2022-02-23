@@ -149,6 +149,8 @@ class Strings {
   static String sSelectCliente = 'Selecciona un cliente';
   static String sSelectAseguradora = 'Selecciona una aseguradora';
   static String sPolizaGuardada = 'Póliza creada';
+  static String sErrorClienteModificacion =
+      'No es posible cambiar de cliente en una póliza';
   static String sPolizaGuardadaText =
       'Tu póliza ha sido creada con éxito ¿Deseas agregar archivos para completarla?';
   static String sAgregregarArchivos = 'Agregar archivos';

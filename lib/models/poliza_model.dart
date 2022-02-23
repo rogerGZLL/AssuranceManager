@@ -7,12 +7,14 @@ class Poliza {
   String clienteID = '';
   String clienteNombre = '';
   String cobertura = '';
+  String ejecutivo = '';
   String estatus = '';
   String fechaEmision = '';
   String fechaInicio = '';
   String fechaPago = '';
   String fechaTerminacion = '';
   String formaPago = '';
+  String from = '';
   String inciso = '';
   String montoTotal = '';
   String numero = '';
@@ -36,6 +38,9 @@ class Poliza {
     if (value['cobertura'] != null) {
       cobertura = value['cobertura'];
     }
+    if (value['ejecutivo'] != null) {
+      ejecutivo = value['ejecutivo'];
+    }
     if (value['estatus'] != null) {
       estatus = value['estatus'];
     }
@@ -53,6 +58,9 @@ class Poliza {
     }
     if (value['formaPago'] != null) {
       formaPago = value['formaPago'];
+    }
+    if (value['from'] != null) {
+      from = value['from'];
     }
     if (value['inciso'] != null) {
       inciso = value['inciso'];
