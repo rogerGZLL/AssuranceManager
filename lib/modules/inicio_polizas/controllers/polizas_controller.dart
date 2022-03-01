@@ -37,6 +37,11 @@ class PolizasController extends GetxController {
   TextEditingController tecEstatus = TextEditingController();
   //Cliente
   TextEditingController tecCliente = TextEditingController();
+  TextEditingController tecClienteCorreo = TextEditingController();
+  TextEditingController tecClienteNombre = TextEditingController();
+  TextEditingController tecClienteRFC = TextEditingController();
+  TextEditingController tecClienteTelefono = TextEditingController();
+  TextEditingController tecClienteFechaNacimiento = TextEditingController();
   //Automóvil
   TextEditingController tecAutoMarca = TextEditingController();
   TextEditingController tecAutoTipo = TextEditingController();
@@ -203,10 +208,18 @@ class PolizasController extends GetxController {
   }
 
   void crearPoliza({Poliza poliza}) {
-    if (validarDatosPoliza()) {
-      poliza == null
-          ? crearPolizaFirebase()
-          : crearPolizaFirebase(poliza: poliza);
+    if (poliza == null) {
+      if (validarDatosPoliza()) {
+        crearPolizaFirebase();
+      }
+    } else {
+      if (poliza.from == 'app') {
+        if (validarDatosPoliza()) {
+          crearPolizaFirebase(poliza: poliza);
+        }
+      } else {
+        crearPolizaFirebase(poliza: poliza);
+      }
     }
   }
 
@@ -246,7 +259,13 @@ class PolizasController extends GetxController {
       'clienteID': idClienteSelected,
       'clienteNombre': tecCliente.text,
       'ejecutivo': ejecutivo,
-      'from': from
+      'from': from,
+      //From excel
+      'clienteCorreo': from == 'excel' ? tecClienteCorreo.text : null,
+      'clienteRFC': from == 'excel' ? tecClienteRFC.text : null,
+      'clienteTelefono': from == 'excel' ? tecClienteTelefono.text : null,
+      'clienteFechaNacimiento':
+          from == 'excel' ? tecClienteFechaNacimiento.text : null,
     };
     if (tecRamo.text == 'Auto') value['auto'] = auto;
     print(idPoliza);
@@ -278,7 +297,7 @@ class PolizasController extends GetxController {
           });
         });
       } else {
-        Get.back();
+        //Get.back();
         Get.back();
       }
     }).catchError((onError) {});
@@ -537,6 +556,9 @@ class PolizasController extends GetxController {
       case 'fechaPago':
         tecFechaPago.text = day + '-' + month + '-' + year;
         break;
+      case 'clienteFechaNacimiento':
+        tecClienteFechaNacimiento.text = day + '-' + month + '-' + year;
+        break;
     }
   }
 
@@ -598,6 +620,12 @@ class PolizasController extends GetxController {
       tecAutoLegalizado.text = poliza.auto.esLegalizado;
       tecAutoAdaptaciones.text = poliza.auto.adaptaciones;
     }
+    if (poliza.from == 'excel') {
+      tecClienteCorreo.text = poliza.clienteCorreo;
+      tecClienteRFC.text = poliza.clienteRFC;
+      tecClienteTelefono.text = poliza.clienteTelefono;
+      tecClienteFechaNacimiento.text = poliza.clienteFechaNacimiento;
+    }
     update();
   }
 
@@ -625,6 +653,11 @@ class PolizasController extends GetxController {
     tecAutoResidente.text = '';
     tecAutoLegalizado.text = '';
     tecAutoAdaptaciones.text = '';
+    //From excel
+    tecClienteCorreo.text = '';
+    tecClienteRFC.text = '';
+    tecClienteTelefono.text = '';
+    tecClienteFechaNacimiento.text = '';
     update();
   }
 

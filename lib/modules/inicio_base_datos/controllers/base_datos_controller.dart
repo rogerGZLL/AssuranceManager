@@ -43,6 +43,8 @@ class BaseDatosController extends GetxController {
     }
   }
 
+  void readExcelSyncFusion() {}
+
   void readExcel(String filePath) {
     var bytes = File(filePath).readAsBytesSync();
     excel = Excel.decodeBytes(bytes);
@@ -60,13 +62,14 @@ class BaseDatosController extends GetxController {
         print("$row");
       }*/
     }
-    //readSheet('GNP Autos');
+    readSheet('GNP Autos');
+    //readSheet('ANASEGUROS');
   }
 
   void readSheet(String table) {
     var sheet = excel[table];
-    /*print(sheet.maxCols);
-    print(sheet.maxRows);*/
+    print(sheet.maxCols);
+    print(sheet.maxRows);
     List<Map> listMap = [];
     Map<String, dynamic> datosFirebase = Map();
 
@@ -139,7 +142,8 @@ class BaseDatosController extends GetxController {
       if (row[9] != null) {
         if (row[9].rowIndex > 3) {
           if (row[9].value.toString().isNotEmpty) {
-            poliza = row[9].value.toString();
+            poliza = double.parse(row[9].value.toString()).toStringAsFixed(0);
+            print(poliza);
           }
         }
       }
@@ -157,23 +161,31 @@ class BaseDatosController extends GetxController {
           }
         }
       }
-      /*if (row[12] != null) {
+      if (row[12] != null) {
         if (row[12].rowIndex > 3) {
           if (row[12].value.toString().isNotEmpty) {
             auto = {
-              'adaptaciones': row[14].value.toString(),
+              'adaptaciones': row[14]?.value.toString() == 'null'
+                  ? ''
+                  : row[14]?.value.toString(),
               'esLegalizado': '',
               'esResidente': '',
-              'marca': row[12].value.toString(),
-              'modelo': row[15].value.toString(),
+              'marca': row[12]?.value.toString() == 'null'
+                  ? ''
+                  : row[12]?.value.toString(),
+              'modelo': row[15]?.value.toString() == 'null'
+                  ? ''
+                  : row[15]?.value.toString(),
               'motor': '',
               'placas': '',
               'serie': '',
-              'tipo': row[13].value.toString(),
+              'tipo': row[13]?.value.toString() == 'null'
+                  ? ''
+                  : row[13]?.value.toString(),
             };
           }
         }
-      }*/
+      }
       if (row[16] != null) {
         if (row[16].rowIndex > 3) {
           if (row[16].value.toString().isNotEmpty) {
@@ -195,13 +207,11 @@ class BaseDatosController extends GetxController {
           }
         }
       }
-      if (row[32] != null) {
+
+      if (row[32] != null && nombre != null && ejecutivo != null) {
         if (row[32].rowIndex > 3) {
           if (row[32].value.toString().isNotEmpty) {
-            Formula formula = row[32].props[0];
-
-            total = formula.formula;
-            //total = row[32].
+            total = row[32].value.toString();
           }
         }
       }

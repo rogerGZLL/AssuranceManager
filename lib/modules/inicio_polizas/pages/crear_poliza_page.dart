@@ -132,6 +132,40 @@ class CrearPolizaPage extends StatelessWidget {
                           enabled: true,
                           tec: _.tecCliente,
                           hintText: Strings.sClienteExistente),
+                      poliza != null && poliza.from == 'excel'
+                          ? Column(
+                              children: [
+                                WidgetInputMain(
+                                    enabled: true,
+                                    textCapitalization: TextCapitalization.none,
+                                    obscureText: false,
+                                    tit: TextInputType.text,
+                                    tec: _.tecClienteCorreo,
+                                    hintText: Strings.sCorreoCliente),
+                                WidgetInputMain(
+                                    enabled: true,
+                                    textCapitalization: TextCapitalization.none,
+                                    obscureText: false,
+                                    tit: TextInputType.text,
+                                    tec: _.tecClienteRFC,
+                                    hintText: Strings.sRFC),
+                                WidgetInputMain(
+                                    enabled: true,
+                                    textCapitalization: TextCapitalization.none,
+                                    obscureText: false,
+                                    tit: TextInputType.text,
+                                    tec: _.tecClienteTelefono,
+                                    hintText: Strings.sTelefonoCliente),
+                                WidgetSelectorMain(
+                                    fun: () => _.showModalDatePolizas(
+                                        'clienteFechaNacimiento'),
+                                    label: true,
+                                    enabled: true,
+                                    tec: _.tecClienteFechaNacimiento,
+                                    hintText: Strings.sFechaNacimiento),
+                              ],
+                            )
+                          : Container()
                     ],
                   ),
                   //Automóvil

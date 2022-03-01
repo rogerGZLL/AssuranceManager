@@ -25,6 +25,7 @@ class WidgetAppBarMain extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       elevation: 0.0,
+      shadowColor: Colors.black38,
       leading: isBack
           ? IconButton(
               icon: const Icon(

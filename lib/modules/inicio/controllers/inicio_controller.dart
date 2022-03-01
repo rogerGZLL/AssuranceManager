@@ -9,6 +9,7 @@ import 'package:assurance/modules/inicio_notas/pages/notas_page.dart';
 import 'package:assurance/modules/inicio_polizas/pages/polizas_menu_page.dart';
 import 'package:assurance/modules/inicio_polizas_pendientes/pages/polizas_pendientes_page.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InicioController extends GetxController {
   GlobalControllerUsuario globalControllerUsuario =
@@ -35,7 +36,8 @@ class InicioController extends GetxController {
         Get.to(() => GastosIngresosPage());
         break;
       case 'baseDatos':
-        Get.to(() => BaseDatosPage());
+        launch('https://assurance-manager.web.app/');
+        //Get.to(() => BaseDatosPage());
         break;
       case 'notas':
         Get.to(() => NotasPage());

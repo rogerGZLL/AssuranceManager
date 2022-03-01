@@ -7,18 +7,23 @@ class Poliza {
   String clienteID = '';
   String clienteNombre = '';
   String cobertura = '';
-  String ejecutivo = '';
   String estatus = '';
   String fechaEmision = '';
   String fechaInicio = '';
   String fechaPago = '';
   String fechaTerminacion = '';
   String formaPago = '';
-  String from = '';
   String inciso = '';
   String montoTotal = '';
   String numero = '';
   String ramo = '';
+  //From Excel
+  String clienteCorreo = '';
+  String clienteFechaNacimiento = '';
+  String clienteRFC = '';
+  String clienteTelefono = '';
+  String ejecutivo = '';
+  String from = '';
 
   Poliza();
   Poliza.fromJson(String key, Map value) {
@@ -73,6 +78,18 @@ class Poliza {
     }
     if (value['ramo'] != null) {
       ramo = value['ramo'];
+    }
+    if (value['clienteCorreo'] != null) {
+      clienteCorreo = value['clienteCorreo'];
+    }
+    if (value['clienteFechaNacimiento'] != null) {
+      clienteFechaNacimiento = value['clienteFechaNacimiento'];
+    }
+    if (value['clienteRFC'] != null) {
+      clienteRFC = value['clienteRFC'];
+    }
+    if (value['clienteTelefono'] != null) {
+      clienteTelefono = value['clienteTelefono'];
     }
   }
 }
