@@ -186,4 +186,8 @@ class Strings {
   static String sImportarExcel = 'Importar excel';
   static String sImportandoError =
       'Espera a que tu archivo termine de importarse';
+  //Profile
+  static String sFotoSelect = 'Selecciona una opción';
+  static String sFotoCamara = 'Desde la cámara';
+  static String sFotoGaleria = 'Desde la galería';
 }

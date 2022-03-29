@@ -158,4 +158,10 @@ class UtilsDialog {
     );
     return pr;
   }
+
+  static void hideDialog(ProgressDialog progressDialog) {
+    Future.delayed(Duration(milliseconds: 100)).then((value) {
+      progressDialog.hide().whenComplete(() {});
+    });
+  }
 }

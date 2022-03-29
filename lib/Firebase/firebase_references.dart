@@ -1,7 +1,8 @@
 import 'package:assurance/Firebase/firebase_services.dart';
 
 class FirebaseReferences {
-  //Database Reference
-  static var dbRefUsuarios =
-      FirebaseServices.databaseReference.child('usuarios');
+  static var dbRefAgentesSeguro =
+      FirebaseServices.databaseReference.child('agentesSeguro');
+  static var stRefAgentesSeguro =
+      FirebaseServices.storageReference.child('agentesSeguro');
 }

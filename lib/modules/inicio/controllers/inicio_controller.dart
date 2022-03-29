@@ -2,7 +2,6 @@ import 'package:assurance/controllers/global_controller_usuario.dart';
 import 'package:assurance/modules/home/controllers/home_controller.dart';
 import 'package:assurance/modules/inicio_about/pages/about_page.dart';
 import 'package:assurance/modules/inicio_actividad/pages/actividad_page.dart';
-import 'package:assurance/modules/inicio_base_datos/pages/base_datos_page.dart';
 import 'package:assurance/modules/inicio_clientes/pages/clientes_page.dart';
 import 'package:assurance/modules/inicio_gastos_ingresos/pages/gastos_ingresos_page.dart';
 import 'package:assurance/modules/inicio_notas/pages/notas_page.dart';
