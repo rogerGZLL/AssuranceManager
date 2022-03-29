@@ -191,4 +191,9 @@ class Strings {
   static String sFotoCamara = 'Desde la cámara';
   static String sFotoGaleria = 'Desde la galería';
   static String sEditarPerfil = 'Editar perfil';
+  static String sCorreoBirthday = 'Enviar correos de cumpleaños a mis clientes';
+  static String sCorreoChristmas = 'Enviar correos navideños a mis clientes';
+  static String sCorreoNewYear = 'Enviar correos de año nuevo a mis clientes';
+  static String sCorreoRecordatorioPagos =
+      'Enviar recordatorios de pago a mis clientes';
 }

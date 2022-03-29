@@ -24,10 +24,10 @@ class PerfilController extends GetxController {
   TextEditingController get tecTelefono => _tecTelefono;
   TextEditingController _tecRFC = TextEditingController();
   TextEditingController get tecRFC => _tecRFC;
-  bool correoBirthday;
-  bool correoChristmas;
-  bool correoNewYear;
-  bool correoRecordatorioPagos;
+  bool correoBirthday = false;
+  bool correoChristmas = false;
+  bool correoNewYear = false;
+  bool correoRecordatorioPagos = false;
   File _image;
   File get image => _image;
   ProgressDialog _progressDialog;
@@ -140,15 +140,11 @@ class PerfilController extends GetxController {
       'nombre': _tecNombre.text,
       'telefono': _tecTelefono.text,
       'rfc': _tecRFC.text,
-      /* 'correoBirthday': correoBirthday,
+      'correoBirthday': correoBirthday,
       'correoChristmas': correoChristmas,
       'correoNewYear': correoNewYear,
-      'correoRecordatorioPagos': correoRecordatorioPagos,*/
+      'correoRecordatorioPagos': correoRecordatorioPagos,
       'fechaModificado': DateTime.now().millisecondsSinceEpoch,
-      'correoNewYear': false,
-      'correoBirthday': false,
-      'correoChristmas': false,
-      'correoRecordatorioPagos': false,
     };
     FirebaseReferences.dbRefAgentesSeguro
         .child(globalControllerUsuario.usuario.uid)
@@ -163,6 +159,24 @@ class PerfilController extends GetxController {
       hideDialogAndShowErrores(onError.toString());
       //UtilsDialog.hideDialog(_progressDialog);
     });
+  }
+
+  void updatePreference(String type, bool value) {
+    switch (type) {
+      case 'correoBirthday':
+        correoBirthday = value;
+        break;
+      case 'correoChristmas':
+        correoChristmas = value;
+        break;
+      case 'correoNewYear':
+        correoNewYear = value;
+        break;
+      case 'correoRecordatorioPagos':
+        correoRecordatorioPagos = value;
+        break;
+    }
+    update();
   }
 
   void saveDataUserController() {

@@ -1,5 +1,6 @@
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/modules/perfil/controllers/perfil_controller.dart';
+import 'package:assurance/modules/perfil/pages/widgets/item_perfil_preference.dart';
 import 'package:assurance/widgets/widget_input_main.dart';
 import 'package:assurance/widgets/widget_margin.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,27 @@ class PerfilEditData extends StatelessWidget {
               obscureText: false,
               tit: TextInputType.text,
               tec: _.tecRFC,
-              hintText: Strings.sRFC)
+              hintText: Strings.sRFC),
+          WidgetMargin(margin: 32),
+          ItemPerfilPreference(
+              title: Strings.sCorreoBirthday,
+              enable: _.correoBirthday,
+              type: 'correoBirthday'),
+          WidgetMargin(margin: 16),
+          ItemPerfilPreference(
+              title: Strings.sCorreoChristmas,
+              enable: _.correoChristmas,
+              type: 'correoChristmas'),
+          WidgetMargin(margin: 16),
+          ItemPerfilPreference(
+              title: Strings.sCorreoNewYear,
+              enable: _.correoNewYear,
+              type: 'correoNewYear'),
+          WidgetMargin(margin: 16),
+          ItemPerfilPreference(
+              title: Strings.sCorreoRecordatorioPagos,
+              enable: _.correoRecordatorioPagos,
+              type: 'correoRecordatorioPagos'),
         ],
       );
     });
