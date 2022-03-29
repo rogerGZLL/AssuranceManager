@@ -190,4 +190,5 @@ class Strings {
   static String sFotoSelect = 'Selecciona una opción';
   static String sFotoCamara = 'Desde la cámara';
   static String sFotoGaleria = 'Desde la galería';
+  static String sEditarPerfil = 'Editar perfil';
 }

@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:assurance/Firebase/firebase_errors.dart';
 import 'package:assurance/Firebase/firebase_references.dart';
 import 'package:assurance/constants/strings.dart';
 import 'package:assurance/controllers/global_controller_usuario.dart';
+import 'package:assurance/modules/perfil/pages/perfil_page_edit.dart';
 import 'package:assurance/utils/utils.dart';
 import 'package:assurance/utils/utils_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +24,10 @@ class PerfilController extends GetxController {
   TextEditingController get tecTelefono => _tecTelefono;
   TextEditingController _tecRFC = TextEditingController();
   TextEditingController get tecRFC => _tecRFC;
+  bool correoBirthday;
+  bool correoChristmas;
+  bool correoNewYear;
+  bool correoRecordatorioPagos;
   File _image;
   File get image => _image;
   ProgressDialog _progressDialog;
@@ -38,6 +44,11 @@ class PerfilController extends GetxController {
     _tecCorreo.text = globalControllerUsuario.usuario.correo;
     _tecTelefono.text = globalControllerUsuario.usuario.telefono;
     _tecRFC.text = globalControllerUsuario.usuario.rfc;
+    correoBirthday = globalControllerUsuario.usuario.correoBirthday;
+    correoChristmas = globalControllerUsuario.usuario.correoChristmas;
+    correoNewYear = globalControllerUsuario.usuario.correoNewYear;
+    correoRecordatorioPagos =
+        globalControllerUsuario.usuario.correoRecordatorioPagos;
   }
 
   void selectImage() {
@@ -96,7 +107,8 @@ class PerfilController extends GetxController {
         uploadAvatarDatabase(url);
       });
     }).catchError((onError) {
-      UtilsDialog.hideDialog(_progressDialog);
+      hideDialogAndShowErrores(onError.toString());
+      //UtilsDialog.hideDialog(_progressDialog);
     });
   }
 
@@ -111,9 +123,96 @@ class PerfilController extends GetxController {
         });
       });
     }).catchError((onError) {
-      UtilsDialog.hideDialog(_progressDialog);
+      hideDialogAndShowErrores(onError.toString());
+      //UtilsDialog.hideDialog(_progressDialog);
     });
   }
 
-  void toEditProfile() {}
+  void saveData() {
+    if (validarDatos()) {
+      uploadDataFirebase();
+    }
+  }
+
+  void uploadDataFirebase() {
+    _progressDialog.show();
+    final data = {
+      'nombre': _tecNombre.text,
+      'telefono': _tecTelefono.text,
+      'rfc': _tecRFC.text,
+      /* 'correoBirthday': correoBirthday,
+      'correoChristmas': correoChristmas,
+      'correoNewYear': correoNewYear,
+      'correoRecordatorioPagos': correoRecordatorioPagos,*/
+      'fechaModificado': DateTime.now().millisecondsSinceEpoch,
+      'correoNewYear': false,
+      'correoBirthday': false,
+      'correoChristmas': false,
+      'correoRecordatorioPagos': false,
+    };
+    FirebaseReferences.dbRefAgentesSeguro
+        .child(globalControllerUsuario.usuario.uid)
+        .update(data)
+        .then((value) {
+      Future.delayed(Duration(milliseconds: 100)).then((value) {
+        _progressDialog.hide().whenComplete(() {
+          saveDataUserController();
+        });
+      });
+    }).catchError((onError) {
+      hideDialogAndShowErrores(onError.toString());
+      //UtilsDialog.hideDialog(_progressDialog);
+    });
+  }
+
+  void saveDataUserController() {
+    globalControllerUsuario.usuario.nombre = _tecNombre.text;
+    globalControllerUsuario.usuario.telefono = _tecTelefono.text;
+    globalControllerUsuario.usuario.rfc = _tecRFC.text;
+    globalControllerUsuario.usuario.correoBirthday = correoBirthday;
+    globalControllerUsuario.usuario.correoChristmas = correoChristmas;
+    globalControllerUsuario.usuario.correoNewYear = correoNewYear;
+    globalControllerUsuario.usuario.correoRecordatorioPagos =
+        correoRecordatorioPagos;
+    update();
+    Get.back();
+  }
+
+  bool validarDatos() {
+    bool valido = true;
+    if (_tecNombre.text.trim().isEmpty) {
+      valido = false;
+      UtilsDialog.alertDialogError(
+          Get.overlayContext, Strings.sErrorNombreEmpty);
+    } else if (_tecTelefono.text.trim().isEmpty) {
+      valido = false;
+      UtilsDialog.alertDialogError(
+          Get.overlayContext, Strings.sErrorTelefonoEmpty);
+    } else if (_tecTelefono.text.trim().length != 10) {
+      valido = false;
+      UtilsDialog.alertDialogError(
+          Get.overlayContext, Strings.sErrorTelefonoFormat);
+    }
+    return valido;
+  }
+
+  void hideDialogAndShowErrores(String error) {
+    Future.delayed(Duration(milliseconds: 300)).then((value) {
+      _progressDialog.hide().whenComplete(() {
+        UtilsDialog.alertDialogError(
+          Get.overlayContext,
+          FirebaseErrors.erroresFirebase(error),
+        );
+      });
+    });
+  }
+
+  void toEditProfile() {
+    Get.to(() => PerfilPageEdit());
+  }
+
+  void onBack() {
+    initData();
+    Get.back();
+  }
 }
