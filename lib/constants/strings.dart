@@ -82,6 +82,7 @@ class Strings {
   static String sTelefonoCliente = 'Teléfono';
   static String sFechaNacimiento = 'Fecha de nacimiento';
   static String sRFC = 'RFC del cliente';
+  static String sRFCUnique = 'RFC';
   static String sErrorNombreCliente = 'El nombre del cliente es obligatorio';
   static String sErrorEmailCliente = 'El correo del cliente es obligatorio';
   static String sErrorEmailClienteFormat = 'El formato de correo es inválido';
@@ -196,4 +197,6 @@ class Strings {
   static String sCorreoNewYear = 'Enviar correos de año nuevo a mis clientes';
   static String sCorreoRecordatorioPagos =
       'Enviar recordatorios de pago a mis clientes';
+  static String sPerfilPreferences = 'Preferencias del perfil';
+  static String sDatosPerfil = 'Datos del perfil';
 }

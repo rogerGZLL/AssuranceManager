@@ -45,7 +45,7 @@ class PerfilData extends StatelessWidget {
                   obscureText: false,
                   tit: TextInputType.text,
                   tec: _.tecRFC,
-                  hintText: Strings.sRFC)
+                  hintText: Strings.sRFCUnique)
               : Container(),
         ],
       );
